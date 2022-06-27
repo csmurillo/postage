@@ -667,6 +667,15 @@ video {
 .h-32 {
   height: 8rem;
 }
+.h-52 {
+  height: 13rem;
+}
+.h-28 {
+  height: 7rem;
+}
+.h-20 {
+  height: 5rem;
+}
 .max-h-\[17\.5rem\] {
   max-height: 17.5rem;
 }
@@ -767,6 +776,9 @@ video {
 .border-4 {
   border-width: 4px;
 }
+.border-2 {
+  border-width: 2px;
+}
 .border-x-\[\.05rem\] {
   border-left-width: .05rem;
   border-right-width: .05rem;
@@ -788,6 +800,10 @@ video {
 }
 .border-b-\[1px\] {
   border-bottom-width: 1px;
+}
+.border-red-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(239 68 68 / var(--tw-border-opacity));
 }
 .border-l-gray-800 {
   --tw-border-opacity: 1;
@@ -961,6 +977,10 @@ video {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
+}
 .underline {
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;
@@ -1093,6 +1113,16 @@ html,body{
     right: auto;
   }
 
+  .md\:mx-56 {
+    margin-left: 14rem;
+    margin-right: 14rem;
+  }
+
+  .md\:mx-64 {
+    margin-left: 16rem;
+    margin-right: 16rem;
+  }
+
   .md\:flex {
     display: flex;
   }
@@ -1144,6 +1174,21 @@ html,body{
     padding-right: 12rem;
   }
 
+  .md\:px-64 {
+    padding-left: 16rem;
+    padding-right: 16rem;
+  }
+
+  .md\:px-72 {
+    padding-left: 18rem;
+    padding-right: 18rem;
+  }
+
+  .md\:px-96 {
+    padding-left: 24rem;
+    padding-right: 24rem;
+  }
+
   .md\:pl-5 {
     padding-left: 1.25rem;
   }
@@ -1151,12 +1196,27 @@ html,body{
   .md\:pt-5 {
     padding-top: 1.25rem;
   }
+
+  .md\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .md\:text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
 }
 @media (min-width: 1024px) {
 
   .lg\:mx-48 {
     margin-left: 12rem;
     margin-right: 12rem;
+  }
+
+  .lg\:mx-64 {
+    margin-left: 16rem;
+    margin-right: 16rem;
   }
 
   .lg\:grid-cols-3 {
@@ -1176,8 +1236,25 @@ html,body{
     padding-right: 9rem;
   }
 
+  .lg\:px-72 {
+    padding-left: 18rem;
+    padding-right: 18rem;
+  }
+
+  .lg\:px-96 {
+    padding-left: 24rem;
+    padding-right: 24rem;
+  }
+
   .lg\:text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
+  }
+}
+@media (min-width: 1280px) {
+
+  .xl\:px-96 {
+    padding-left: 24rem;
+    padding-right: 24rem;
   }
 }

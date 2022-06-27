@@ -34,7 +34,7 @@ Route::get('/settings', function () {
 });
 // settings routes
 Route::get('/account', function () {
-    return view('settings/account/index');
+    return view('settings/account/edit');
 });
 
 Route::get('/changePassword', function () {
@@ -60,7 +60,8 @@ Route::put('/post/{id}',[PostsController::class,'update']);
 Route::delete('/post/{id}',[PostsController::class,'destroy']);
 
 // user
-Route::put('user/update',[UserController::class,'update']);
+Route::patch('user/{user}',[UserController::class,'update']);
+Route::patch('updatepassword/{user}',[UserController::class,'updatePassword']);
 
 
 
