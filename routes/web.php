@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
-
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,11 +64,8 @@ Route::delete('/post/{id}',[PostsController::class,'destroy']);
 Route::patch('user/{user}',[UserController::class,'update']);
 Route::patch('updatepassword/{user}',[UserController::class,'updatePassword']);
 
-
-
-
-
-
+// profile
+Route::patch('/profile/{user}',[ProfileController::class,'update']);
 
 
 
