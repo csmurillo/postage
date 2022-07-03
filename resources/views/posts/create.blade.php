@@ -4,18 +4,22 @@
 <div class="relative flex flex-col sm:px-5 lg:px-36">
     
     <div id="preview-create" class="hidden">
+
         <div class="mb-5">
             <input class="text-lg py-1 px-3 border rounded text-black bg-white" type="button" value="Back" onclick="back()"/>
         </div>
+
         <div id='preview-content' class="px-4">
             <h1 id="preview-title" class="text-2xl"></h1>
             <div id="preview-paragraph-container">
 
             </div>
         </div>
+
     </div>
 
-    <form id="form">
+    <form id="form" action="/post" enctype="multipart/form-data" method="post">
+        @csrf
         <div class="flex mb-4">
             <label class="text-xl" for="title">Post Title:</label>
             <input id="title" class="flex-1 text-lg" name="title" type="text"/>
@@ -37,7 +41,7 @@
         
         <div class="relative mb-5">
             <label class="text-sm">Paragraph</label>
-            <textarea class="w-full paragraph" placeholder="Type Here!!!" rows="10"></textarea>
+            <textarea id="content" name="content" class="w-full paragraph" placeholder="Type Here!!!" rows="10"></textarea>
             <div class="absolute right-0">
                 <input type="button" class="bg-white border p-2 rounded text-xs" onclick="addParagraph(this);" value="Add Paragraph" />
             </div>
@@ -55,8 +59,8 @@
 
 @endsection
 
-
 <script>
+
     function addParagraph(button){
         const div = document.createElement("div");
         div.innerHTML=`
@@ -71,6 +75,7 @@
         const topLevelParent=button.parentElement.parentElement;
         topLevelParent.parentElement.insertBefore(div,topLevelParent.nextSibling);
     }
+    
     function previewPost(){
         const form =document.getElementById('form');
         const title=document.getElementById('title').value;
@@ -93,14 +98,13 @@
         const paragraphContainer=document.getElementById('preview-paragraph-container');
         const paragraphs=document.getElementsByClassName("paragraph");
         for(let i=0;i<=paragraphs.length;i++){
-            // alert('~');
             const div = document.createElement("div");
             div.innerHTML=paragraphs[i].value;
-            // alert(paragraphs[i]);
             paragraphContainer.append(div);
         }
         alert(paragraphs.length);
     }
+
     function back(){
         const form =document.getElementById('form');
         const prevCreate=document.getElementById('preview-create');
@@ -110,6 +114,10 @@
         const paragraphContainer=document.getElementById('preview-paragraph-container');
         paragraphContainer.innerHTML="";
     }
+
 </script>
+
+
+
 
 

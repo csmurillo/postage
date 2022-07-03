@@ -54,28 +54,17 @@ Route::get('/dashboard',[PostsController::class,'index']);
 Route::get('/posts/search',[PostsController::class,'search']);
 Route::get('/post/create',[PostsController::class,'create']);
 Route::get('/post/{id}',[PostsController::class,'show']);
-Route::get('/post/{id}/edit',[PostsController::class,'edit']);
+Route::get('/post/{post}/edit',[PostsController::class,'edit']);
 /////////////////////////////////////////////////////
 Route::post('/post',[PostsController::class,'store']);
-Route::put('/post/{id}',[PostsController::class,'update']);
-Route::delete('/post/{id}',[PostsController::class,'destroy']);
+Route::patch('/post/{post}',[PostsController::class,'update']);
+Route::delete('/post/{post}',[PostsController::class,'destroy']);
 
 // user
 Route::patch('user/{user}',[UserController::class,'update']);
 Route::patch('updatepassword/{user}',[UserController::class,'updatePassword']);
+Route::delete('user/{user}',[UserController::class,'destroy']);
 
 // profile
 Route::patch('/profile/{user}',[ProfileController::class,'update']);
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -10,15 +10,16 @@
         <div id='preview-content' class="px-4">
             <h1 id="preview-title" class="text-2xl"></h1>
             <div id="preview-paragraph-container">
-
             </div>
         </div>
     </div>
 
-    <form id="form">
+    <form id="form" action="/post/{{$post->id}}" enctype="multipart/form-data" method="post">
+        @csrf
+        @method('PATCH')
         <div class="flex mb-4">
             <label class="text-xl" for="title">Post Title:</label>
-            <input id="title" class="flex-1 text-lg" name="title" type="text"/>
+            <input id="title" class="flex-1 text-lg" name="title" type="text" value="{{$post->title}}"/>
         </div>
         
         <div class="flex mb-4">
@@ -26,18 +27,18 @@
 
             <select class="text-xl flex-1" name="topic" id="pet-select">
                 <option value="">--Please choose an option--</option>
-                <option value="autonomousDriving">Autonomous Driving</option>
-                <option value="crypto">Crypto</option>
-                <option value="hardware">Hardware</option>
-                <option value="programmingLanguages">Programming Languages</option>
-                <option value="rocketScience">Rocket Science</option>
-                <option value="virtualReality">Virtual Reality</option>
+                <option value="autonomousDriving" {{$post->topic=='autonomousDriving'?'selected':''}}>Autonomous Driving</option>
+                <option value="crypto" {{$post->topic=='crypto'?'selected':''}}>Crypto</option>
+                <option value="hardware" {{$post->topic=='hardware'?'selected':''}}>Hardware</option>
+                <option value="programmingLanguages" {{$post->topic=='programmingLanguages'?'selected':''}}>Programming Languages</option>
+                <option value="rocketScience" {{$post->topic=='rocketScience'?'selected':''}}>Rocket Science</option>
+                <option value="virtualReality" {{$post->topic=='virtualReality'?'selected':''}}>Virtual Reality</option>
             </select>
         </div>
         
         <div class="relative mb-5">
             <label class="text-sm">Paragraph</label>
-            <textarea class="w-100 paragraph" placeholder="Type Here!!!" rows="10"></textarea>
+            <textarea id="content" name="content" class="w-full paragraph" placeholder="Type Here!!!" rows="10">{{$post['content']}}</textarea>
             <div class="absolute right-0">
                 <input type="button" class="bg-white border p-2 rounded text-xs" onclick="addParagraph(this);" value="Add Paragraph" />
             </div>
@@ -45,12 +46,11 @@
 
         <div class="flex justify-center gap-4">
             <div id="e" class="">
-                <button class="bg-white border p-2 rounded">Create Post</button>
+                <button class="bg-white border p-2 rounded" type="submit">Update Post</button>
             </div>
             <input class="border p-2 rounded bg-slate-200" type="button" onclick="previewPost()" value="Preview"/>
         </div>
     </form>
-   
 </div>
 
 @endsection
