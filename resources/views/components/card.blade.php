@@ -1,8 +1,10 @@
+
 @props(['post'])
-<div class="card flex flex-col">
+
+<div class="card flex flex-col z-10">
     <div class="relative h-48">
         <div class="absolute top-0 right-0 border-2 border-gray-100 rounded mt-2 mr-2 cursor-pointer z-50">
-            <div onclick="editDropdown(this)">
+            <div class="threedots" onclick="editDropdown(this)">
                 <x-bi-three-dots class="text-white w-6 h-6" />
             </div>
             <div class="hidden">
@@ -28,14 +30,35 @@
 </div>
 
 <script>
+    function handleThreeDotsOutsideClick(e){
+        let threeDots=document.getElementsByClassName('threedots');
+        let target=e.target;
+        for(let i=0; i<threeDots.length;i++){
+            const threeDotsMasterParent=threeDots[i].parentElement;
+            if(threeDotsMasterParent.contains(target)){
+                // alert('will not vanish');
+            }
+            else{
+                // alert('will vanish');
+                threeDots[i].nextElementSibling.classList.remove('flex');
+                threeDots[i].nextElementSibling.classList.add('hidden');
+            }
+        }
+        
+    }
+
     function editDropdown(threeDots){
+        // show edit/delete
         if(threeDots.nextElementSibling.classList.contains('hidden')){
             threeDots.nextElementSibling.classList.remove('hidden');
             threeDots.nextElementSibling.classList.add('flex');
+            window.addEventListener('click',handleThreeDotsOutsideClick);
         }
+        // hide edit/delete
         else{
             threeDots.nextElementSibling.classList.remove('flex');
             threeDots.nextElementSibling.classList.add('hidden');
+            window.removeEventListener('click',handleThreeDotsOutsideClick);
         }
     }
 </script>

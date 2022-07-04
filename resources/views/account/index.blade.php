@@ -16,7 +16,7 @@
             <form id="update-description" class="hidden flex-1 flex-col" action="/profile/{{ Auth::user()->id }}" enctype="multipart/form-data" method="post">
                 @csrf
                 @method('PATCH')
-                <textarea id="description" name="description" class="flex-1" style="resize:none">{{Auth::user()->profile->description}}</textarea>
+                <textarea id="description" name="description" class="flex-1" style="resize:none">{{Auth::user()->profile->description ?? ''}}</textarea>
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Update</button>
             </form>
         </div>

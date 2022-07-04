@@ -16,11 +16,11 @@
 </div>
 
 
-<div class="hidden sm:block absolute h-full w-full top-0">
+<div class="hidden sm:block absolute h-full w-full top-0 -z-[10px]">
     <button class="fixed bottom-20 right-20 rounded-md border bg-blue-500 px-5 py-2 text-white text-xl" type="button" onclick="window.location='{{ url('/post/create') }}'">Add Post +</button>
 </div>
 
-<div class="block sm:hidden absolute h-20 w-full bottom-0">
+<div class="block sm:hidden absolute h-20 w-full bottom-0 -z-[10px]">
     <button class="fixed border bg-blue-500 text-white text-xl w-full h-20" type="button" onclick="window.location='{{ url('/post/create') }}'">Add Post +</button>
 </div>
 

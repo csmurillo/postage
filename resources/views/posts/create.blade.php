@@ -22,7 +22,12 @@
         @csrf
         <div class="flex mb-4">
             <label class="text-xl" for="title">Post Title:</label>
-            <input id="title" class="flex-1 text-lg" name="title" type="text"/>
+            <input id="title" class="flex-1 text-lg" name="title" type="text" value="{{ old('title') }}"/>
+            @error('title')
+                <span class="">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
         
         <div class="flex mb-4">
@@ -30,21 +35,31 @@
 
             <select class="text-xl flex-1" name="topic" id="pet-select">
                 <option value="">--Please choose an option--</option>
-                <option value="autonomousDriving">Autonomous Driving</option>
-                <option value="crypto">Crypto</option>
-                <option value="hardware">Hardware</option>
-                <option value="programmingLanguages">Programming Languages</option>
-                <option value="rocketScience">Rocket Science</option>
-                <option value="virtualReality">Virtual Reality</option>
+                <option value="autonomousDriving" {{old('topic')=='autonomousDriving'?'selected':''}}>Autonomous Driving</option>
+                <option value="crypto" {{old('topic')=='crypto'?'selected':''}}>Crypto</option>
+                <option value="hardware" {{old('topic')=='hardware'?'selected':''}}>Hardware</option>
+                <option value="programmingLanguages" {{old('topic')=='programmingLanguages'?'selected':''}}>Programming Languages</option>
+                <option value="rocketScience" {{old('topic')=='rocketScience'?'selected':''}}>Rocket Science</option>
+                <option value="virtualReality" {{old('topic')=='virtualReality'?'selected':''}}>Virtual Reality</option>
             </select>
+            @error('topic')
+                <span class="">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
         
         <div class="relative mb-5">
             <label class="text-sm">Paragraph</label>
-            <textarea id="content" name="content" class="w-full paragraph" placeholder="Type Here!!!" rows="10"></textarea>
+            <textarea id="content" name="content" class="w-full paragraph" placeholder="Type Here!!!" rows="10">{{ old('content') }}</textarea>
             <div class="absolute right-0">
                 <input type="button" class="bg-white border p-2 rounded text-xs" onclick="addParagraph(this);" value="Add Paragraph" />
             </div>
+            @error('content')
+                <span class="">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
 
         <div class="flex justify-center gap-4">
