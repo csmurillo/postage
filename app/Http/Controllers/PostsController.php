@@ -30,15 +30,21 @@ class PostsController extends Controller
     {
 
         $formData = request()->validate([
+            'image' => ['image'],
             'title' => ['required', 'string', 'max:255'],
             'topic' => ['required', 'string', 'max:255'],
             'content' => ['required', 'string', 'max:1600'],
         ]);    
 
+        if(request()->hasFile('image')){
+            $imagePath = request('image')->store('uploads','public');
+            $formData['image']=$imagePath;
+        }
+
         $user= auth()->user();
 
         $formData['user_id']=$user->id;
-
+        
         Post::create($formData);
         
         return redirect('/dashboard');

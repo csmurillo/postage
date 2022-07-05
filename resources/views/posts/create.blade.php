@@ -20,6 +20,12 @@
 
     <form id="create-form" action="/post" enctype="multipart/form-data" method="post" onsubmit="setContent()">
         @csrf
+
+        <div>
+            <label for="image">Image:</label>
+            <input type="file" name="image" id="image" />
+        </div>
+
         <div class="flex mb-4">
             <label class="text-xl" for="title">Post Title:</label>
             <input id="title" class="flex-1 text-lg" name="title" type="text" value="{{ old('title') }}"/>

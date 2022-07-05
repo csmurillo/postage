@@ -38,7 +38,7 @@
         
         <div class="relative mb-5">
             <label class="text-sm">Paragraph</label>
-            <textarea id="content" name="content" class="w-full paragraph" placeholder="Type Here!!!" rows="10">{{$post['content']}}</textarea>
+            <textarea id="content" name="content" class="w-full paragraph" placeholder="Type Here!!!" rows="10">{{strip_tags($post['content'])}}</textarea>
             <div class="absolute right-0">
                 <input type="button" class="bg-white border p-2 rounded text-xs" onclick="addParagraph(this);" value="Add Paragraph" />
             </div>

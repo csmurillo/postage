@@ -22,7 +22,8 @@
                 </div>
             </div>
         </div>
-        <img class="rounded-t-sm w-full h-full" src="{{asset('images/defaultImage.png')}}" height="0px" width="0px" />
+        <img class="rounded-t-sm w-full h-full" src="{{$post->image ? asset('storage/' . $post->image) : asset('images/defaultImage.png') }}"
+         height="0px" width="0px" />
     </div>
     <div>
         <p class="text-lg ml-2 py-2">{{$post['title']}}</p>
