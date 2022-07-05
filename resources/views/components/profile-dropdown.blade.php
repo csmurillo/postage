@@ -1,5 +1,5 @@
 <div class="relative w-32 flex justify-center">
-    <div>
+    <div id="profile">
         <div class="flex flex-col cursor-pointer" onclick="profileDropdown()">
             <x-css-profile class="h-12 w-12 text-slate-400"/>
             <p class="text-center select-none">{{Auth::user()->username}}</p>
@@ -26,15 +26,31 @@
     </div>
 </div>
 <script>
-    function profileDropdown(){
+    function handleProfileDropdown(e){
+        let profile=document.getElementById('profile');
         const profileDropdown = document.getElementById('profile-dropdown');
-        if(profileDropdown.classList.contains('hidden')){
-            profileDropdown.classList.remove('hidden');
-            profileDropdown.classList.add('flex');
-        }
+        let target=e.target;
+        if(profile.contains(target)){}
         else{
             profileDropdown.classList.remove('flex');
             profileDropdown.classList.add('hidden');
+        }
+
+    }
+
+    function profileDropdown(){
+        const profileDropdown = document.getElementById('profile-dropdown');
+        // show profile
+        if(profileDropdown.classList.contains('hidden')){
+            profileDropdown.classList.remove('hidden');
+            profileDropdown.classList.add('flex');
+            window.addEventListener('click',handleProfileDropdown);
+        }
+        // hide profile
+        else{
+            profileDropdown.classList.remove('flex');
+            profileDropdown.classList.add('hidden');
+            window.addEventListener('click',handleProfileDropdown);
         }
     }
 </script>
