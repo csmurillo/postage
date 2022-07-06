@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="relative flex flex-col sm:px-5 lg:px-36">
+<div class="relative flex flex-col sm:px-5 lg:px-72">
     
     <div id="preview-create" class="hidden">
 
@@ -54,34 +54,22 @@
                 </span>
             @enderror
         </div>
-        
-        {{-- <div class="relative mb-5">
-            <label class="text-sm">Paragraph</label>
-            <textarea id="content" name="content" class="w-full paragraph" placeholder="Type Here!!!" rows="10">{{ old('content') }}</textarea>
-            <div class="absolute right-0">
-                <input type="button" class="bg-white border p-2 rounded text-xs" onclick="addInputSection(this);" value="Add Paragraph" />
-            </div>
-            @error('content')
-                <span class="">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-        </div> --}}
-        {{--  --}}
+
         <textarea id="content" name="content" class="hidden" placeholder="Type Here!!!" rows="10"></textarea>
-        {{--  --}}
-        
-        {{--  --}}
+
         <div class="w-full">
             <div class="flex">
                 <label class="text-lg">Title:</label>
-                <input type="text" name="titleid-681892" class="title flex-1 border-b-2">
+                <input type="text" name="titleid-363233" class="title flex-1 border-b-2">
             </div>
-            <div class="relative mb-5">
-                <label class="text-lg">Paragraph</label>
-                <textarea class="w-full paragraph border-2" placeholder="Type Here!!!" rows="10"></textarea>
-                <div class="absolute right-0">
-                    <input type="button" class="bg-white border p-2 rounded text-xs" onclick="addInputSection(this);" value="Add Paragraph">
+            <div>
+                <div class="relative mb-5">
+                    <label class="text-lg">Paragraph</label>
+                    <textarea class="w-full paragraph border-2" placeholder="Type Here!!!" rows="10"></textarea>
+                    <div class="absolute right-0">
+                        <input type="button" class="bg-white border p-2 rounded text-xs" onclick="addImageSection(this);" value="Add Image">
+                        <input type="button" class="bg-white border p-2 rounded text-xs" onclick="addInputSection(this);" value="Add Paragraph">
+                    </div>
                 </div>
             </div>
         </div>
@@ -98,7 +86,7 @@
             <input class="border p-2 rounded bg-slate-200" type="button" onclick="previewPost()" value="Preview"/>
         </div>
     </form>
-   
+    <img id="demoImg" src=""/>
 </div>
 
 @endsection
@@ -110,9 +98,26 @@
         return titleId+''+Math.floor(Math.random() * (999999 - 100000) + 100000);
     }
 
+    function createCloseContentSectionButton(){
+        const btnDiv = document.createElement("div");
+        const closeBtn = document.createElement("button");
+        btnDiv.classList.add('flex');
+        btnDiv.classList.add('w-full');
+        btnDiv.classList.add('justify-end');
+        closeBtn.innerHTML='×';
+        closeBtn.type="button";
+        closeBtn.addEventListener('click',function click(){
+            removeInputSection(this);
+        });
+        btnDiv.append(closeBtn);
+        return btnDiv;
+    }
     function createTitle(){
         const div = document.createElement("div");
-        div.classList.add("flex");;
+        const btnDiv=createCloseContentSectionButton();
+        div.append(btnDiv);
+        const titleGroup = document.createElement("div");
+        titleGroup.classList.add("flex");
         const label= document.createElement("label");
         label.classList.add("text-lg");
         let id=getTitleId();
@@ -125,8 +130,10 @@
         input.classList.add("flex-1");
         input.classList.add("border-b-2");
         
-        div.append(label);
-        div.append(input);
+        titleGroup.append(label);
+        titleGroup.append(input);
+
+        div.append(titleGroup);
         return div;
     }
 
@@ -137,6 +144,7 @@
                 <label class="text-lg">Paragraph</label>
                 <textarea class="w-full paragraph border-2" placeholder="Type Here!!!" rows="10"></textarea>
                 <div class="absolute right-0">
+                    <input type="button" class="bg-white border p-2 rounded text-xs" onclick="addImageSection(this);" value="Add Image">
                     <input type="button" class="bg-white border p-2 rounded text-xs" onclick="addInputSection(this);" value="Add Paragraph" />
                 </div>
             </div>
@@ -146,6 +154,7 @@
     function addInputSection(button){
         const section = document.createElement("div");
         section.classList.add("w-full");
+
         const title=createTitle();
         const paragraph=createParagraph();
         section.append(title);
@@ -155,7 +164,122 @@
 
         topLevelParent.parentElement.insertBefore(section,topLevelParent.nextSibling);
     }
-    
+
+    function back(){
+        const form =document.getElementById('create-form');
+        const prevCreate=document.getElementById('preview-create');
+        prevCreate.classList.remove('block');
+        prevCreate.classList.add('hidden');
+        form.classList.remove('hidden');
+        const paragraphContainer=document.getElementById('preview-paragraph-container');
+        paragraphContainer.innerHTML="";
+    }
+
+    function setContent(){
+        
+        let titles=document.getElementsByClassName('title');
+        let paragraphs=document.getElementsByClassName('paragraph');
+        let loops=titles.length;
+
+        let content=document.getElementById('content');
+        for(let i=0; i<=loops;i++){
+            if(titles[i].value) {
+                content.value=content.value+`<h1>${titles[i].value}</h1>`;
+            }
+            if(paragraphs[i].value){
+                content.value=content.value+`<p>${paragraphs[i].value}</p>`;
+            }   
+        }
+    }
+
+    function removeInputSection(button){
+        // alert();
+        button.parentElement.parentElement.parentElement.remove();
+    }
+    // 
+    function removeImageSection(button){
+        button.parentElement.parentElement.remove();
+    }
+    function createCloseImageSectionButton(){
+        const btnDiv = document.createElement("div");
+        const closeBtn = document.createElement("button");
+        btnDiv.classList.add('flex');
+        btnDiv.classList.add('w-full');
+        btnDiv.classList.add('justify-end');
+        closeBtn.innerHTML='×';
+        closeBtn.type="button";
+        closeBtn.addEventListener('click',function click(){
+            removeImageSection(this);
+        });
+        btnDiv.append(closeBtn);
+        return btnDiv;
+    }
+    const file =[
+        {
+            fileId:1,
+            filePath:null
+        },
+        {
+            fileId:2,
+            filePath:null
+        },
+        {
+            fileId:3,
+            filePath:null
+        },
+        {
+            fileId:4,
+            filePath:null
+        },
+        {
+            fileId:5,
+            filePath:null
+        },
+    ];
+
+    function getValidFileId(){
+        for(let i=0; i<file.length;i++){
+            if(file[i].filePath!=null){
+                return file[i].fileId;
+            }
+        }
+        return null;
+    }
+
+    function setFilePath(){
+        var reader  = new FileReader();
+        reader.onloadend = function () {
+        preview.src = reader.result;
+    }
+    }
+
+    function createImageDrop(){
+        const closeBtn=createCloseImageSectionButton();
+        const div = document.createElement("div");
+        div.classList.add('w-full');
+        const label = document.createElement("label");
+        const inputFile = document.createElement("input");
+        inputFile.type="file";
+        // inputFile.class="file";
+        div.append(closeBtn);
+        div.append(label);
+        div.append(inputFile);
+
+        const addSectionGroup = document.createElement("div");
+        addSectionGroup.classList.add('relative');
+        addSectionGroup.classList.add('right-0');
+        addSectionGroup.innerHTML=`<input type="button" class="bg-white border p-2 rounded text-xs" onclick="addImageSection(this);" value="Add Image">
+                    <input type="button" class="bg-white border p-2 rounded text-xs" onclick="addInputSection(this);" value="Add Paragraph" />`;
+        div.append(addSectionGroup);
+        return div;
+    }
+
+    function addImageSection(button){
+        const imageDivSection=createImageDrop();
+        const topLevelParent=button.parentElement.parentElement;
+
+        topLevelParent.parentElement.insertBefore(imageDivSection,topLevelParent.nextSibling);
+    }
     function previewPost(){
         const form =document.getElementById('create-form');
         const title=document.getElementById('title').value;
@@ -183,40 +307,6 @@
         }
         // alert(paragraphs.length);
     }
-
-    function back(){
-        const form =document.getElementById('create-form');
-        const prevCreate=document.getElementById('preview-create');
-        prevCreate.classList.remove('block');
-        prevCreate.classList.add('hidden');
-        form.classList.remove('hidden');
-        const paragraphContainer=document.getElementById('preview-paragraph-container');
-        paragraphContainer.innerHTML="";
-    }
-
-    function setContent(){
-        
-        let titles=document.getElementsByClassName('title');
-        let paragraphs=document.getElementsByClassName('paragraph');
-        let loops=titles.length;
-        alert('loops'+loops+'!~'+titles[0].value);
-
-        let content=document.getElementById('content');
-        for(let i=0; i<=loops;i++){
-            if(titles[i].value){
-                content.value=content.value+`<h1>${titles[i].value}</h1>`;
-            }
-            if(paragraphs[i].value){
-                content.value=content.value+`<p>${paragraphs[i].value}</p>`;
-            }
-            alert(titles[i].value);
-            alert(content.value);
-            
-        }
-        alert(content.value);
-        
-    }
-
 </script>
 
 

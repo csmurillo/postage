@@ -733,9 +733,6 @@ video {
 .w-\[85\%\] {
   width: 85%;
 }
-.w-2\/12 {
-  width: 16.666667%;
-}
 .w-48 {
   width: 12rem;
 }
@@ -760,8 +757,14 @@ video {
 .flex-col {
   flex-direction: column;
 }
+.items-end {
+  align-items: flex-end;
+}
 .items-center {
   align-items: center;
+}
+.justify-end {
+  justify-content: flex-end;
 }
 .justify-center {
   justify-content: center;
@@ -777,6 +780,9 @@ video {
 }
 .gap-2 {
   gap: 0.5rem;
+}
+.justify-self-end {
+  justify-self: end;
 }
 .rounded {
   border-radius: 0.25rem;
@@ -909,17 +915,13 @@ video {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
 }
-.px-48 {
-  padding-left: 12rem;
-  padding-right: 12rem;
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
 }
 .px-72 {
   padding-left: 18rem;
   padding-right: 18rem;
-}
-.px-10 {
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
 }
 .pl-2 {
   padding-left: 0.5rem;
@@ -950,6 +952,9 @@ video {
 }
 .pr-10 {
   padding-right: 2.5rem;
+}
+.pl-48 {
+  padding-left: 12rem;
 }
 .text-center {
   text-align: center;
@@ -1151,12 +1156,25 @@ html,body{
 }
 @media (min-width: 768px) {
 
+  .md\:relative {
+    position: relative;
+  }
+
   .md\:left-0 {
     left: 0px;
   }
 
   .md\:right-auto {
     right: auto;
+  }
+
+  .md\:mx-0 {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  .md\:block {
+    display: block;
   }
 
   .md\:flex {
@@ -1175,6 +1193,10 @@ html,body{
     width: 12rem;
   }
 
+  .md\:w-2\/12 {
+    width: 16.666667%;
+  }
+
   .md\:flex-1 {
     flex: 1 1 0%;
   }
@@ -1191,6 +1213,10 @@ html,body{
     gap: 1rem;
   }
 
+  .md\:border-none {
+    border-style: none;
+  }
+
   .md\:p-28 {
     padding: 7rem;
   }
@@ -1203,6 +1229,11 @@ html,body{
   .md\:px-28 {
     padding-left: 7rem;
     padding-right: 7rem;
+  }
+
+  .md\:px-48 {
+    padding-left: 12rem;
+    padding-right: 12rem;
   }
 
   .md\:pl-5 {
@@ -1245,6 +1276,16 @@ html,body{
   .lg\:px-36 {
     padding-left: 9rem;
     padding-right: 9rem;
+  }
+
+  .lg\:px-48 {
+    padding-left: 12rem;
+    padding-right: 12rem;
+  }
+
+  .lg\:px-72 {
+    padding-left: 18rem;
+    padding-right: 18rem;
   }
 
   .lg\:text-3xl {
