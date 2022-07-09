@@ -11,7 +11,7 @@
 
         <div id='preview-content' class="px-4">
             <h1 id="preview-title" class="text-2xl"></h1>
-            <div id="preview-paragraph-container">
+            <div id="preview-field-container">
 
             </div>
         </div>
@@ -60,12 +60,12 @@
         <div class="w-full">
             <div class="flex">
                 <label class="text-lg">Title:</label>
-                <input type="text" name="titleid-363233" class="title flex-1 border-b-2">
+                <input type="text" name="titleid-363233" class="title flex-1 border-b-2 field">
             </div>
             <div>
                 <div class="relative mb-5">
                     <label class="text-lg">Paragraph</label>
-                    <textarea class="w-full paragraph border-2" placeholder="Type Here!!!" rows="10"></textarea>
+                    <textarea class="w-full paragraph border-2 field" placeholder="Type Here!!!" rows="10"></textarea>
                     <div class="absolute right-0">
                         <input type="button" class="bg-white border p-2 rounded text-xs" onclick="addImageSection(this);" value="Add Image">
                         <input type="button" class="bg-white border p-2 rounded text-xs" onclick="addInputSection(this);" value="Add Paragraph">
@@ -98,6 +98,46 @@
         return titleId+''+Math.floor(Math.random() * (999999 - 100000) + 100000);
     }
 
+    function setContent(){
+        
+        let titles=document.getElementsByClassName('title');
+        let paragraphs=document.getElementsByClassName('paragraph');
+        let loops=titles.length;
+
+        let content=document.getElementById('content');
+        for(let i=0; i<=loops;i++){
+            if(titles[i].value) {
+                content.value=content.value+`<h1>${titles[i].value}</h1>`;
+            }
+            if(paragraphs[i].value){
+                content.value=content.value+`<p>${paragraphs[i].value}</p>`;
+            }   
+        }
+    }
+    function back(){
+        const form =document.getElementById('create-form');
+        const prevCreate=document.getElementById('preview-create');
+        prevCreate.classList.remove('block');
+        prevCreate.classList.add('hidden');
+        form.classList.remove('hidden');
+        const paragraphContainer=document.getElementById('preview-field-container');
+        paragraphContainer.innerHTML="";
+    }
+
+    // addInputSection
+    function addInputSection(button){
+        const section = document.createElement("div");
+        section.classList.add("w-full");
+
+        const title=createTitle();
+        const paragraph=createParagraph();
+        section.append(title);
+        section.append(paragraph);
+
+        const topLevelParent=button.parentElement.parentElement;
+
+        topLevelParent.parentElement.insertBefore(section,topLevelParent.nextSibling);
+    }
     function createCloseContentSectionButton(){
         const btnDiv = document.createElement("div");
         const closeBtn = document.createElement("button");
@@ -126,6 +166,7 @@
         const input = document.createElement('input');
         input.type="text";
         input.name=id;
+        input.classList.add('field');
         input.classList.add("title");
         input.classList.add("flex-1");
         input.classList.add("border-b-2");
@@ -142,7 +183,7 @@
         div.innerHTML=`
             <div class="relative mb-5">
                 <label class="text-lg">Paragraph</label>
-                <textarea class="w-full paragraph border-2" placeholder="Type Here!!!" rows="10"></textarea>
+                <textarea class="w-full paragraph border-2 field" placeholder="Type Here!!!" rows="10"></textarea>
                 <div class="absolute right-0">
                     <input type="button" class="bg-white border p-2 rounded text-xs" onclick="addImageSection(this);" value="Add Image">
                     <input type="button" class="bg-white border p-2 rounded text-xs" onclick="addInputSection(this);" value="Add Paragraph" />
@@ -151,54 +192,48 @@
         `;
         return div;
     }
-    function addInputSection(button){
-        const section = document.createElement("div");
-        section.classList.add("w-full");
-
-        const title=createTitle();
-        const paragraph=createParagraph();
-        section.append(title);
-        section.append(paragraph);
-
-        const topLevelParent=button.parentElement.parentElement;
-
-        topLevelParent.parentElement.insertBefore(section,topLevelParent.nextSibling);
-    }
-
-    function back(){
-        const form =document.getElementById('create-form');
-        const prevCreate=document.getElementById('preview-create');
-        prevCreate.classList.remove('block');
-        prevCreate.classList.add('hidden');
-        form.classList.remove('hidden');
-        const paragraphContainer=document.getElementById('preview-paragraph-container');
-        paragraphContainer.innerHTML="";
-    }
-
-    function setContent(){
-        
-        let titles=document.getElementsByClassName('title');
-        let paragraphs=document.getElementsByClassName('paragraph');
-        let loops=titles.length;
-
-        let content=document.getElementById('content');
-        for(let i=0; i<=loops;i++){
-            if(titles[i].value) {
-                content.value=content.value+`<h1>${titles[i].value}</h1>`;
-            }
-            if(paragraphs[i].value){
-                content.value=content.value+`<p>${paragraphs[i].value}</p>`;
-            }   
-        }
-    }
-
     function removeInputSection(button){
-        // alert();
         button.parentElement.parentElement.parentElement.remove();
     }
-    // 
-    function removeImageSection(button){
-        button.parentElement.parentElement.remove();
+    // end addInputSection
+    
+    // addImageSection
+    function addImageSection(button){
+        const imageDivSection=createImageDrop();
+        const topLevelParent=button.parentElement.parentElement;
+        topLevelParent.parentElement.insertBefore(imageDivSection,topLevelParent.nextSibling);
+    }
+    function createImageDrop(){
+        const closeBtn=createCloseImageSectionButton();
+        const div = document.createElement("div");
+        div.classList.add('w-full');
+        const label = document.createElement("label");
+        const inputFile = document.createElement("input");
+        inputFile.type="file";
+        setImageInputFields(inputFile);
+        inputFile.addEventListener('change', function onChange(){
+            setFilePath(this);
+        });
+        div.append(closeBtn);
+        div.append(label);
+        div.append(inputFile);
+
+        const addSectionGroup = document.createElement("div");
+        addSectionGroup.classList.add('relative');
+        addSectionGroup.classList.add('right-0');
+        addSectionGroup.innerHTML=`<input type="button" class="bg-white border p-2 rounded text-xs" onclick="addImageSection(this);" value="Add Image">
+                    <input type="button" class="bg-white border p-2 rounded text-xs" onclick="addInputSection(this);" value="Add Paragraph" />`;
+        div.append(addSectionGroup);
+        return div;
+    }
+    function setImageInputFields(inputFile){
+        if(hasValidFileId()){
+            let inputFileId=getValidFileId();
+            inputFile.id="image"+inputFileId;
+            inputFile.name="image"+inputFileId;
+            inputFile.classList.add('image');
+            inputFile.classList.add('field');
+        }
     }
     function createCloseImageSectionButton(){
         const btnDiv = document.createElement("div");
@@ -214,6 +249,10 @@
         btnDiv.append(closeBtn);
         return btnDiv;
     }
+    function removeImageSection(button){
+        button.parentElement.parentElement.remove();
+    }
+    // end addImageSection
     const file =[
         {
             fileId:1,
@@ -236,49 +275,40 @@
             filePath:null
         },
     ];
-
+    function hasValidFileId(){
+        for(let i=0; i<file.length;i++){
+            if(file[i].filePath==null){
+                return true;
+            }
+        }
+        return false;
+    }
+    function setFileId(path){
+        for(let i=0; i<file.length;i++){
+            if(file[i].filePath==null){
+                file[i].filePath=path;
+            }
+        }
+    }
     function getValidFileId(){
         for(let i=0; i<file.length;i++){
-            if(file[i].filePath!=null){
+            if(file[i].filePath==null){
                 return file[i].fileId;
             }
         }
-        return null;
     }
 
-    function setFilePath(){
+    function setFilePath(inputFile,imagePreview){
+        alert('trigger');
         var reader  = new FileReader();
+
         reader.onloadend = function () {
-        preview.src = reader.result;
-    }
-    }
-
-    function createImageDrop(){
-        const closeBtn=createCloseImageSectionButton();
-        const div = document.createElement("div");
-        div.classList.add('w-full');
-        const label = document.createElement("label");
-        const inputFile = document.createElement("input");
-        inputFile.type="file";
-        // inputFile.class="file";
-        div.append(closeBtn);
-        div.append(label);
-        div.append(inputFile);
-
-        const addSectionGroup = document.createElement("div");
-        addSectionGroup.classList.add('relative');
-        addSectionGroup.classList.add('right-0');
-        addSectionGroup.innerHTML=`<input type="button" class="bg-white border p-2 rounded text-xs" onclick="addImageSection(this);" value="Add Image">
-                    <input type="button" class="bg-white border p-2 rounded text-xs" onclick="addInputSection(this);" value="Add Paragraph" />`;
-        div.append(addSectionGroup);
-        return div;
-    }
-
-    function addImageSection(button){
-        const imageDivSection=createImageDrop();
-        const topLevelParent=button.parentElement.parentElement;
-
-        topLevelParent.parentElement.insertBefore(imageDivSection,topLevelParent.nextSibling);
+            // let imagePreview=document.getElementById('demoImg');
+            imagePreview.src = reader.result;
+        }
+        if(inputFile.files && inputFile.files[0]){
+            reader.readAsDataURL(inputFile.files[0]);
+        }
     }
     function previewPost(){
         const form =document.getElementById('create-form');
@@ -297,15 +327,29 @@
         prevCreate.classList.add('block');
         form.classList.add('hidden');
 
-        // add paragraphs to preview-paragraph-container
-        const paragraphContainer=document.getElementById('preview-paragraph-container');
-        const paragraphs=document.getElementsByClassName("paragraph");
-        for(let i=0;i<=paragraphs.length;i++){
-            const div = document.createElement("div");
-            div.innerHTML=paragraphs[i].value;
-            paragraphContainer.append(div);
+        // add paragraphs to preview-field-container
+        const fieldContainer=document.getElementById('preview-field-container');
+        const fields=document.getElementsByClassName('field');
+        for(let i=0;i<=fields.length;i++){
+            if(fields[i].classList.contains('title')){
+                const heading = document.createElement("h1");
+                heading.innerHTML=fields[i].value;
+                fieldContainer.append(heading);
+                alert('title it is');
+            }
+            if(fields[i].classList.contains('paragraph')){
+                const paragraph = document.createElement("p");
+                paragraph.innerHTML=fields[i].value;
+                fieldContainer.append(paragraph);
+                alert('paragraph it is');
+            }
+            if(fields[i].classList.contains('image')){
+                const img = document.createElement("img");
+                setFilePath(fields[i],img);
+                fieldContainer.append(img);
+                alert('image it is');
+            }
         }
-        // alert(paragraphs.length);
     }
 </script>
 
