@@ -38,7 +38,7 @@ class PostsController extends Controller
             'image5' => ['image'],
             'title' => ['required', 'string', 'max:255'],
             'topic' => ['required', 'string', 'max:255'],
-            'content' => ['required', 'string', 'max:1600'],
+            'content' => ['required', 'string', 'max:4600'],
         ]);    
 
         if(request()->hasFile('image')){

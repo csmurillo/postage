@@ -86,34 +86,34 @@
     function getTitleId(){
         return titleId+''+Math.floor(Math.random() * (999999 - 100000) + 100000);
     }
-    function previewPost(){
-        const form =document.getElementById('form');
-        const title=document.getElementById('title').value;
+    // function previewPost(){
+    //     const form =document.getElementById('form');
+    //     const title=document.getElementById('title').value;
 
-        const prevCreate=document.getElementById('preview-create');
-        const prevTitle=document.getElementById('preview-title');
+    //     const prevCreate=document.getElementById('preview-create');
+    //     const prevTitle=document.getElementById('preview-title');
 
         
-        if(title.length>0){
-            prevTitle.innerHTML=title;
-        }
-        else{
-            prevTitle.innerHTML="TITLE NOT SET"
-        }
-        prevCreate.classList.remove('hidden');
-        prevCreate.classList.add('block');
-        form.classList.add('hidden');
+    //     if(title.length>0){
+    //         prevTitle.innerHTML=title;
+    //     }
+    //     else{
+    //         prevTitle.innerHTML="TITLE NOT SET"
+    //     }
+    //     prevCreate.classList.remove('hidden');
+    //     prevCreate.classList.add('block');
+    //     form.classList.add('hidden');
 
-        // add paragraphs to preview-paragraph-container
-        const paragraphContainer=document.getElementById('preview-paragraph-container');
-        const paragraphs=document.getElementsByClassName("paragraph");
-        for(let i=0;i<=paragraphs.length;i++){
-            const div = document.createElement("div");
-            div.innerHTML=paragraphs[i].value;
-            paragraphContainer.append(div);
-        }
-        alert(paragraphs.length);
-    }
+    //     // add paragraphs to preview-paragraph-container
+    //     const paragraphContainer=document.getElementById('preview-paragraph-container');
+    //     const paragraphs=document.getElementsByClassName("paragraph");
+    //     for(let i=0;i<=paragraphs.length;i++){
+    //         const div = document.createElement("div");
+    //         div.innerHTML=paragraphs[i].value;
+    //         paragraphContainer.append(div);
+    //     }
+    //     alert(paragraphs.length);
+    // }
     function back(){
         const form =document.getElementById('form');
         const prevCreate=document.getElementById('preview-create');
@@ -397,6 +397,17 @@
             reader.readAsDataURL(inputFile.files[0]);
         }
     }
+
+    function back(){
+        const form =document.getElementById('create-form');
+        const prevCreate=document.getElementById('preview-create');
+        prevCreate.classList.remove('block');
+        prevCreate.classList.add('hidden');
+        form.classList.remove('hidden');
+        const paragraphContainer=document.getElementById('preview-field-container');
+        paragraphContainer.innerHTML="";
+    }
+
     function previewPost(){
         const form =document.getElementById('create-form');
         const title=document.getElementById('title').value;

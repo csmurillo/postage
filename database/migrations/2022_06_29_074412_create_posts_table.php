@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('image5')->nullable();
             $table->string('title');
             $table->string('topic');
-            $table->string('content');
+            $table->longText('content');
             $table->timestamps();
             $table->index('user_id');
         });
