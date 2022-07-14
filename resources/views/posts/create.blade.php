@@ -29,7 +29,6 @@
                 </span>
             @enderror
         </div>
-        
         <div class="flex mb-4">
             <label for="pet-select" class="text-xl">Category:</label>
 
@@ -48,9 +47,7 @@
                 </span>
             @enderror
         </div>
-
         <textarea id="content" name="content" class="hidden" placeholder="Type Here!!!" rows="10"></textarea>
-
         <div id="content-container" class="w-full">
             <div class="w-full mb-2 border-b-2">
                 <div class="flex">
@@ -67,7 +64,6 @@
                 </div>
             </div>
         </div>
-        {{--  --}}
         @error('content')
             <span class="">
                 <strong>{{ $message }}</strong>
@@ -80,11 +76,11 @@
             <input class="border p-2 rounded bg-slate-200" type="button" onclick="previewPost()" value="Preview"/>
         </div>
     </form>
-    <img id="demoImg" src=""/>
 </div>
 
 <script src="{{ asset('js/setImageSection.js') }}"></script>
 <script src="{{ asset('js/setInputSection.js') }}"></script>
+<script src="{{ asset('js/previewPost.js') }}"></script>
 @endsection
 <script>
     function fileCoverImage(inputFile){
@@ -102,12 +98,6 @@
             inputFile.parentElement.children[0].innerHTML="Choose Image";
         }
     }
-    // id state
-    let titleId='titleid-';
-    function getTitleId(){
-        return titleId+''+Math.floor(Math.random() * (999999 - 100000) + 100000);
-    }
-
     function setContent(){
         let content=document.getElementById('content');
         const fields=document.getElementsByClassName('field');
@@ -128,80 +118,6 @@
                 }
             }
         }
-    }
-
-    function back(){
-        const form =document.getElementById('create-form');
-        const prevCreate=document.getElementById('preview-create');
-        prevCreate.classList.remove('block');
-        prevCreate.classList.add('hidden');
-        form.classList.remove('hidden');
-        const paragraphContainer=document.getElementById('preview-field-container');
-        paragraphContainer.innerHTML="";
-    }
-    function previewPost(){
-        const form =document.getElementById('create-form');
-        const title=document.getElementById('title').value;
-
-        const prevCreate=document.getElementById('preview-create');
-        const prevTitle=document.getElementById('preview-title');
-        if(title.length>0){
-            prevTitle.classList.add('font-medium');
-            prevTitle.classList.add('underline');
-            prevTitle.innerHTML=title;
-        }
-        else{
-            prevTitle.innerHTML="TITLE NOT SET"
-        }
-        prevCreate.classList.remove('hidden');
-        prevCreate.classList.add('block');
-        form.classList.add('hidden');
-
-        // add paragraphs to preview-field-container
-        const fieldContainer=document.getElementById('preview-field-container');
-        const fields=document.getElementsByClassName('field');
-        for(let i=0;i<=fields.length;i++){
-            if(fields[i].classList.contains('title')){
-                if(fields[i].value){
-                    const heading = document.createElement("h1");
-                    // heading.classList.add('font-medium');
-                    heading.classList.add('text-xl');
-                    heading.classList.add('mt-2');
-                    heading.innerHTML=fields[i].value;
-                    fieldContainer.append(heading);
-                }
-            }
-            if(fields[i].classList.contains('paragraph')){
-                if(fields[i].value){
-                    const paragraph = document.createElement("p");
-                    paragraph.classList.add('text-lg');
-                    paragraph.classList.add('mb-2');
-                    paragraph.innerHTML=fields[i].value;
-                    fieldContainer.append(paragraph);
-                }
-            }
-            if(fields[i].classList.contains('image')){
-                if(fields[i].files && fields[i].files[0]){
-                    const img = document.createElement("img");
-                    img.classList.add('h-72');
-                    img.classList.add('w-full');
-                    img.classList.add('mb-2');
-                    setImageSrc(fields[i],img);
-                    fieldContainer.append(img);
-                }
-            }
-        }
-    }
-    function setImageSrc(inputFile,img){
-        var reader  = new FileReader();
-        reader.onloadend = function () {
-            if(reader.result){
-                img.src=reader.result;
-            }
-            
-        }
-        if(inputFile.files && inputFile.files[0]){
-            reader.readAsDataURL(inputFile.files[0]);
-        }
+        alert(content.value);
     }
 </script>

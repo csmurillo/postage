@@ -1,3 +1,8 @@
+    // id state
+    let titleId='titleid-';
+    function getTitleId(){
+        return titleId+''+Math.floor(Math.random() * (999999 - 100000) + 100000);
+    }
     // addInputSection
     function addInputSection(button){
         const section = document.createElement("div");

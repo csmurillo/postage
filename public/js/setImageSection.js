@@ -11,7 +11,7 @@
         const closeBtn=createCloseImageSectionButton();
         const div = document.createElement("div");
         div.classList.add('w-full');
-        div.classList.add('mb-2');
+        div.classList.add('pb-2');
         div.classList.add('image-input');
         div.classList.add('border-b-2');
         
@@ -21,8 +21,6 @@
         labelContainer.classList.add('py-2');
         labelContainer.classList.add('mb-4');
         labelContainer.classList.add('bg-blue-500');
-        // labelContainer.classList.add('flex');
-        // labelContainer.classList.add('justify-center');
         const label = document.createElement("label");
         label.classList.add('w-full');
         label.classList.add('flex');
@@ -47,7 +45,6 @@
         labelInputContainer.append(labelContainer);
         labelInputContainer.append(inputFile);
 
-        const currentImageContainer=getImage();
         const noImage=getDivNoImageFound();
 
         container.append(noImage);
@@ -58,7 +55,6 @@
         });
 
         div.append(closeBtn);
-        // div.append(label);
         div.append(container);
         
         const addSectionGroup = document.createElement("div");
@@ -75,6 +71,9 @@
         addSectionGroup.append(btnGroup);
         div.append(addSectionGroup);
         return div;
+    }
+    function inputImageFile(){
+
     }
     function getImage(imgSrc){
         const currentImageContainer=document.createElement("div");
@@ -99,7 +98,6 @@
     }
     function setImageInputFields(inputFile,label){
         let inputFileId=getInputFileId();
-        // label.for="image"+inputFileId;
         label.setAttribute('for', "image"+inputFileId);
         inputFile.id="image"+inputFileId;
         inputFile.name="image"+inputFileId;
@@ -136,7 +134,7 @@
         return inputFileId;
     }
     function inputFilesMaxed(){
-        const maxInputFiles=4;
+        const maxInputFiles=5;
         const contentContainer=document.getElementById('content-container');
         const contentContainerChildren=contentContainer.children;
         let inputFiles=0;

@@ -28,7 +28,6 @@ class PostsController extends Controller
 
     public function store()
     {
-
         $formData = request()->validate([
             'image' => ['image'],
             'image1' => ['image'],
@@ -51,7 +50,7 @@ class PostsController extends Controller
         }
         if(request()->hasFile('image2')){
             $imagePath2 = request('image2')->store('uploads','public');
-            $formData['image1']=$imagePath2;
+            $formData['image2']=$imagePath2;
         }
         if(request()->hasFile('image3')){
             $imagePath3 = request('image3')->store('uploads','public');
@@ -90,17 +89,48 @@ class PostsController extends Controller
     }
 
     public function update(Post $post){
-        // dd(request()->title . request()->topic . request()->content);
         $this->authorize('update',$post);
 
         $formData = request()->validate([
+            'image' => ['image'],
+            'image1' => ['image'],
+            'image2' => ['image'],
+            'image3' => ['image'],
+            'image4' => ['image'],
+            'image5' => ['image'],
             'title' => ['required', 'string', 'max:255'],
             'topic' => ['required', 'string', 'max:255'],
-            'content' => ['required', 'string', 'max:1600'],
-        ]); 
+            'content' => ['required', 'string', 'max:4600'],
+        ]);    
+
+        if(request()->hasFile('image')){
+            $imagePath = request('image')->store('uploads','public');
+            $formData['image']=$imagePath;
+        }
+        if(request()->hasFile('image1')){
+            $imagePath1 = request('image1')->store('uploads','public');
+            $formData['image1']=$imagePath1;
+        }
+        if(request()->hasFile('image2')){
+            $imagePath2 = request('image2')->store('uploads','public');
+            $formData['image2']=$imagePath2;
+        }
+        if(request()->hasFile('image3')){
+            $imagePath3 = request('image3')->store('uploads','public');
+            $formData['image3']=$imagePath3;
+        }
+        if(request()->hasFile('image4')){
+            $imagePath4 = request('image4')->store('uploads','public');
+            $formData['image4']=$imagePath4;
+        }
+        if(request()->hasFile('image5')){
+            $imagePath5 = request('image5')->store('uploads','public');
+            $formData['image5']=$imagePath5;
+        }
+        $user= auth()->user();
+        $formData['user_id']=$user->id;
 
         $post->update($formData);
-
         return redirect('/dashboard');
     }
 
