@@ -1,10 +1,10 @@
 
 @props(['post'])
 
-<div class="card flex flex-col z-10">
+<div class="card flex flex-col z-10 group hover:cursor-pointer" onclick="window.location.href = 'post/{{$post->id}}';">
     <div class="relative h-48">
         <div class="absolute top-0 right-0 border-2 border-gray-100 rounded mt-2 mr-2 cursor-pointer z-50">
-            <div class="threedots" onclick="editDropdown(this)">
+            <div class="threedots disabled:group" onclick="editDropdown(this)" onmouseover="this.parentElement.parentElement.parentElement.classList.remove('group')" onmouseout="this.parentElement.parentElement.parentElement.classList.add('group')">
                 <x-bi-three-dots class="text-white w-6 h-6" />
             </div>
             <div class="hidden">
@@ -25,8 +25,11 @@
         <img class="rounded-t-sm w-full h-full" src="{{$post->image ? asset('storage/' . $post->image) : asset('images/defaultImage.png') }}"
          height="0px" width="0px" />
     </div>
-    <div>
-        <p class="text-lg ml-2 py-2">{{$post['title']}}</p>
+    <div class="flex justify-between">
+        <p class="text-xl ml-2 py-2">{{$post['title']}}</p>
+        <div class="text-xl mr-2 py-2 hidden group-hover:text-blue-400 group-hover:block">
+            <x-css-eye />
+        </div>
     </div>
 </div>
 
