@@ -5,7 +5,15 @@
                 <img src="{{asset('images/logo.png')}}" height="80px" width="120px" />
             </a>
         </div>
-        <div class="flex items-center">
+        <a class="ml-3 flex items-center" href="/posts/search">
+            <div class="flex">
+                <p>Search</p> 
+                <div class="flex items-center justify-center">
+                    <x-css-search class="w-4 h-4"/>
+                </div>
+            </div>
+        </a>
+        <div class="ml-4 flex items-center">
             <p class="hover:cursor-pointer" data-open="false" onclick="exploreDropDown(this)">Explore</p>
         </div>
     </div>
@@ -15,13 +23,10 @@
         <div class="flex items-center">
                 @auth
                     <x-profile-dropdown></x-profile-dropdown>
-                    {{-- <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">
-                        {{Auth::user()->username}}
-                    </a> --}}
                 @else
-                    <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+                    <a href="{{ route('login') }}" class="p-2 bg-blue-500 text-white rounded">Log in</a>
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+                        <a href="{{ route('register') }}" class="ml-4 p-2 border-2 rounded">Register</a>
                     @endif
                 @endauth
             </div>

@@ -19,7 +19,86 @@ class PostsController extends Controller
     }
 
     public function search(){
-        return view('posts.search');
+        if((request()->has('search')) && (request()->has('category')) && (request()->has('topic'))){
+            $search=request('search');
+            $category=request('category');
+            $topics=array_filter(explode(',',request('topic')));
+
+            $posts = Post::latest()
+            ->where('title','like','%'.$search.'%')
+            ->where('content','like','%'.$search.'%')
+            ->where('topic',$category)
+            ->where(function($query) use($topics){
+                foreach($topics as $topic){
+                    $query->orWhere('content','like','%'.$topic.'%');
+                }
+            })->paginate(9);
+        }
+        else if((request()->has('search')) && !(request()->has('category')) && !(request()->has('topic'))){
+            $search=request('search');
+
+            $posts = Post::latest()
+            ->where('title','like','%'.$search.'%')
+            ->where('content','like','%'.$search.'%')
+            ->paginate(9);
+        }
+        else if((request()->has('search')) && (request()->has('category')) && !(request()->has('topic'))){
+            $search=request('search');
+            $category=request('category');
+
+            $posts = Post::latest()
+            ->where('title','like','%'.$search.'%')
+            ->where('content','like','%'.$search.'%')
+            ->where('topic',$category)
+            ->paginate(9);
+        }
+        else if((request()->has('search')) && !(request()->has('category')) && (request()->has('topic'))){
+            $search=request('search');
+            $topics=array_filter(explode(',',request('topic')));
+
+            $posts = Post::latest()
+            ->where('title','like','%'.$search.'%')
+            ->where('content','like','%'.$search.'%')
+            ->where(function($query) use($topics){
+                foreach($topics as $topic){
+                    $query->orWhere('content','like','%'.$topic.'%');
+                }
+            })->paginate(9);
+        }
+        else if((request()->has('category')) && (request()->has('topic'))){
+            $category=request('category');
+            $topics=array_filter(explode(',',request('topic')));
+
+            $posts = Post::latest()
+                ->where('topic',$category)
+                ->where(function($query) use($topics){
+                    foreach($topics as $topic){
+                        $query->orWhere('content','like','%'.$topic.'%');
+                    }
+                })->paginate(9);
+        }
+        else if((request()->has('category')) && !(request()->has('topic'))){
+            $category=request('category');
+            $posts = Post::latest()
+                ->where('topic',$category)
+                ->paginate(9);
+        }
+        else if(!(request()->has('category')) && (request()->has('topic'))){
+            $topics=array_filter(explode(',',request('topic')));
+
+            $posts = Post::latest()
+                ->where(function($query) use($topics){
+                    foreach($topics as $topic){
+                        $query->orWhere('content','like','%'.$topic.'%');
+                    }
+                })->paginate(9);
+        }
+        else{
+            $posts = Post::latest()->paginate(9);
+        }
+        return view('posts.search',[
+            'posts' => $posts
+        ]);
     }
 
     public function create(){

@@ -118,6 +118,5 @@
                 }
             }
         }
-        alert(content.value);
     }
 </script>

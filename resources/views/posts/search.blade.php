@@ -2,102 +2,108 @@
 
 @section('content')
 <div class="px-10 md:px-48">
-    {{-- <h1 class="text-4xl">Search</h1> --}}
-    {{-- mobile options --}}
-    <div class="w-full">
-        <button class="flex justify-end md:hidden" onclick="toggleFilters()">Filters</button>
-        <div id="filters" class="w-full right-0 hidden md:w-2/12 md:block md:relative">
+    <div class="w-full flex xl:flex-row flex-col">
+        <div class="w-full flex justify-end xl:hidden">
+            <button onclick="toggleFilters()">Filters</button>
+        </div>
+        <div id="filters" class="w-full right-0 hidden xl:w-2/12 xl:block xl:relative z-50 bg-white">
+            <div>
+                <h2 class="text-xl mb-3 border-b-2">Search</h2>
+                <div>
+                    <input id="search" class="border" type="text" name="search"/>
+                </div>
+            </div>
             <div class="mx-10 border md:mx-0 md:border-none">
                 <div>
                     <h2 class="text-xl mb-3 border-b-2">Category</h2>
                     <div>
-                        <input type="checkbox" id="autonomous-driving" name="autonomous-driving">
-                        <label class="text-sm" for="autonomous-driving">Autonomous Driving</label>
+                        <input type="checkbox" id="autonomousDriving" name="categories[]" onclick="categoryCheck(this)">
+                        <label class="text-sm" for="autonomousDriving">Autonomous Driving</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="crypto" name="crypto" >
+                        <input type="checkbox" id="crypto" name="categories[]" onclick="categoryCheck(this)">
                         <label class="text-sm" for="crypto">Crypto</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="hardware" name="hardware" >
+                        <input type="checkbox" id="hardware" name="categories[]" onclick="categoryCheck(this)">
                         <label class="text-sm" for="hardware">Hardware</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="programming-languages" name="programming-languages" >
-                        <label class="text-sm" for="programming-languages">Programming Languages</label>
+                        <input type="checkbox" id="programmingLanguages" name="categories[]" onclick="categoryCheck(this)">
+                        <label class="text-sm" for="programmingLanguages">Programming Languages</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="rocket-science" name="rocket-science" >
-                        <label class="text-sm" for="rocket-science">Rocket Science</label>
+                        <input type="checkbox" id="rocketScience" name="categories[]" onclick="categoryCheck(this)">
+                        <label class="text-sm" for="rocketScience">Rocket Science</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="virtual-reality" name="virtual-reality" >
-                        <label class="text-sm" for="virtual-reality">Virtual Reality</label>
+                        <input type="checkbox" id="virtualReality" name="categories[]" onclick="categoryCheck(this)">
+                        <label class="text-sm" for="virtualReality">Virtual Reality</label>
                     </div>
                 </div>
             </div>
             <div class="mx-10 border md:mx-0 md:border-none">
                 <h2 class="text-xl mb-3 border-b-2">Topics</h2>
                 <div>
-                    <input type="checkbox" id="comma-ai" name="comma-ai">
-                    <label class="text-sm" for="comma-ai">Comma ai</label>
+                    <input type="checkbox" id="commaAi" name="topics[]">
+                    <label class="text-sm" for="commaAi">Comma ai</label>
                 </div>
                 <div>
-                    <input type="checkbox" id="google-self-driving" name="google-self-driving" >
-                    <label class="text-sm" for="google-self-driving">Google Self Driving</label>
+                    <input type="checkbox" id="googleSelfDriving" name="topics[]" >
+                    <label class="text-sm" for="googleSelfDriving">Google Self Driving</label>
                 </div>
                 <div>
-                    <input type="checkbox" id="tesla-self-driving" name="tesla-self-driving" >
-                    <label class="text-sm" for="tesla-self-driving">Tesla Self Driving</label>
+                    <input type="checkbox" id="teslaSelfDriving" name="topics[]" >
+                    <label class="text-sm" for="teslaSelfDriving">Tesla Self Driving</label>
                 </div>
                 <div>
-                    <input type="checkbox" id="bitcoin" name="bitcoin" >
+                    <input type="checkbox" id="bitcoin" name="topics[]" >
                     <label class="text-sm" for="bitcoin">Bitcoin</label>
                 </div>
                 <div>
-                    <input type="checkbox" id="etheruem" name="etheruem" >
+                    <input type="checkbox" id="etheruem" name="topics[]" >
                     <label class="text-sm" for="etheruem">Etheruem</label>
                 </div>
                 <div>
-                    <input type="checkbox" id="cardano" name="cardano" >
+                    <input type="checkbox" id="cardano" name="topics[]" >
                     <label class="text-sm" for="cardano">Cardano</label>
                 </div>
                 <div>
-                    <input type="checkbox" id="dogecoin" name="dogecoin" >
+                    <input type="checkbox" id="dogecoin" name="topics[]" >
                     <label class="text-sm" for="dogecoin">Dogecoin</label>
                 </div>
                 <div id="hidden-labels" class="hidden">
                     <div>
-                        <input type="checkbox" id="amd" name="amd" >
+                        <input type="checkbox" id="amd" name="topics[]" >
                         <label class="text-sm" for="amd">AMD</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="nvidia" name="nvidia" >
+                        <input type="checkbox" id="nvidia" name="topics[]" >
                         <label class="text-sm" for="nvidia">Nvidia</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="c++" name="c++" >
+                        <input type="checkbox" id="c++" name="topics[]" >
                         <label class="text-sm" for="c++">C++</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="python" name="python" >
+                        <input type="checkbox" id="python" name="topics[]" >
                         <label class="text-sm" for="python">Python</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="ruby-on-rails" name="ruby-on-rails" >
-                        <label class="text-sm" for="ruby-on-rails">Ruby on Rails</label>
+                        <input type="checkbox" id="rubyOnRails" name="topics[]" >
+                        <label class="text-sm" for="rubyOnRails">Ruby on Rails</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="javascript" name="javascript" >
+                        <input type="checkbox" id="javascript" name="topics[]" >
                         <label class="text-sm" for="javascript">Javascript</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="oculus" name="oculus" >
+                        <input type="checkbox" id="oculus" name="topics[]" >
                         <label class="text-sm" for="oculus">Oculus</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="playstationvr" name="playstationvr" >
-                        <label class="text-sm" for="playstationvr">Playstationvr</label>
+                        <input type="checkbox" id="playstationVr" name="topics[]" >
+                        <label class="text-sm" for="playstationVr">Playstationvr</label>
                     </div>
                 </div>
                 <div id="show-btn" class="block">
@@ -106,21 +112,131 @@
                 <div id="hide-btn" class="hidden">
                     <input class="underline" type="button" value="Show Less" onclick="toggleShowLabels('hide-btn');"/>
                 </div>
+                <div>
+                    <button type="button" class="w-full border-2 py-2 rounded bg-blue-500 text-white" onclick="updateFilters()">Update Filters</button>
+                </div>
+            </div>
+        </div>
+        <div class="flex-1 px-6">
+            <h1 id="search-name" class="text-xl">All</h1>
+            <div id="posts" class="sm:grid md:grid-cols-3 sm:grid-cols-2 gap-4">
+            @foreach($posts as $post)
+                <x-card :post="$post"></x-card>
+            @endforeach
+            </div>
+            <div class="h-10">
+                <div>
+                    {{$posts->withQueryString()->links()}}
+                </div>
             </div>
         </div>
     </div>
-    
 </div>
 
 <script>
+    // new functions
+    window.onload=()=>{
+        // posts
+        var posts = document.getElementById('posts');
+        // topics checkbox
+        var topicsCheckbox = document.getElementsByName("topics[]");
+        // category checkbox
+        var categoriesCheckbox = document.getElementsByName("categories[]");
+
+        var searchName = document.getElementById('search-name');
+
+        let url = new URL(window.location.href);
+        let category=url.searchParams.get("category");
+        let topics=url.searchParams.get("topic").split(',');
+        let search=url.searchParams.get("search");
+        // topics checkbox
+        for(var i=0; i<topics.length;i++){
+            for(var j=0; j<topicsCheckbox.length;j++){
+                if(topics[i]==topicsCheckbox[j].id){
+                    topicsCheckbox[j].checked=true;
+                }
+            }
+        }
+        // categories checkbox
+        for(let x=0; x<categoriesCheckbox.length;x++){
+            if(categoriesCheckbox[x].id==category){
+                categoriesCheckbox[x].checked=true;
+            }
+        }
+        // search
+        if(search){
+            searchName.innerHTML='Search: '+search;
+        }
+        else if(posts.childElementCount==0){
+            searchName.innerHTML='No Results Found';
+        }
+        else{
+            searchName.innerHTML='Results';
+        }
+    };
+    function categoryCheck(currentCategory){
+        var categories = document.getElementsByName("categories[]");
+        if(!currentCategory.checked){
+            currentCategory.checked=false;
+        }
+        else{
+            for(let i=0;i<categories.length;i++){
+            categories[i].checked=false; 
+            }
+            currentCategory.checked=true;
+        }
+    }
+    function updateFilters(){
+        let url = new URL(window.location.origin+window.location.pathname);
+
+        // query
+        let search='';
+        let category='';
+        let topic='';
+
+        // check search
+        var searchInput = document.getElementById('search');
+
+        // check categories
+        var categories = document.getElementsByName("categories[]");
+        for(let i=0; i<categories.length;i++){
+            if(categories[i].checked){
+                category=categories[i].id;
+            }
+        }
+        // check topics
+        var topics = document.getElementsByName("topics[]");
+        for(let i=0; i<topics.length;i++){
+            if(topics[i].checked){
+                topic=topic+topics[i].id+',';
+            }
+        }
+
+        if(searchInput.value.length>0){
+            alert('it is greater then 0'+searchInput.value);
+            url.searchParams.append('search',searchInput.value);
+        }
+        if(category.length>0){
+            url.searchParams.append('category', category);
+        }
+        if(topic.length>0){
+            url.searchParams.append('topic', topic);
+        }
+        if(category.length!=0 || topic.length!=0||searchInput.value.length>0){
+            window.location.href=url;
+        }
+    }
+
     function toggleFilters(){
         const filters=document.getElementById('filters');
         if(filters.classList.contains('hidden')){
             filters.classList.remove('hidden');
             filters.classList.add('absolute');
+            filters.classList.add('mt-6');
         }
         else{
             filters.classList.remove('absolute');
+            filters.classList.remove('mt-6');
             filters.classList.add('hidden');
         }
     }
