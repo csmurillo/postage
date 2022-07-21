@@ -1,4 +1,4 @@
-<div id="menu" class="bg-white hidden md:hidden absolute h-full w-full z-40 min-h-[500px] mt-[120px] border-t-2">
+<div id="menu" class="bg-white hidden md:hidden absolute h-full w-full z-[999999] min-h-[500px] mt-[120px] border-t-2">
     <ul>
         <a href="{{ url('/home') }}">
             <li class="text-lg w-full flex justify-center items-center h-16 border-b-2">

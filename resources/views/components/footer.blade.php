@@ -3,16 +3,24 @@
         <div class="mb-4">
             <h1 class="text-xl">Company</h1>
             <ul class="pl-1">
-                <li>About Us</li>
-                <li>Team</li>
-                <li>Careers</li>
+                <li>
+                    <a href="/about">About Us</a>
+                </li>
+                <li>
+                    <a href="/team">Team</a>
+                </li>
+                <li>
+                    <a href="/careers">Careers</a>
+                </li>
 
             </ul>
         </div>
         <div>
             <h1 class="text-xl">Legal</h1>
             <ul>
-                <li>Terms & Services</li>
+                <li>
+                    <a href="/terms/services">Terms & Services</a>
+                </li>
             </ul>
         </div>
     </div>

@@ -1,16 +1,6 @@
 @extends('layouts.app')
 @section('content')
 <div class="relative flex flex-col sm:px-5 lg:px-72">
-    {{-- <div class="flex flex-col">
-        <p>{{$post['image']}}</p>
-        <p>{{$post['title']}}</p>
-        <p>{{$post['content']}}</p>
-        <p>{{$post['image1']}}</p>
-        <p>{{$post['image2']}}</p>
-        <p>{{$post['image3']}}</p>
-        <p>{{$post['image4']}}</p>
-        <p>{{$post['image5']}}</p>
-    </div> --}}
     <div id="preview-create" class="hidden">
         <div class="mb-5">
             <input class="text-lg py-1 px-3 border rounded text-black bg-white" type="button" value="Back" onclick="back()"/>
@@ -21,7 +11,7 @@
             </div>
         </div>
     </div>
-    <form id="create-form" action="/post/{{$post->id}}" enctype="multipart/form-data" method="post" onsubmit="setContent();">
+    <form id="create-form" action="/post/{{$post->id}}" enctype="multipart/form-data" method="post" onsubmit="setContent(event);">
         @csrf
         @method('PATCH')
         <div class="flex gap-2 mb-4">
@@ -98,7 +88,7 @@
             inputFile.parentElement.children[0].innerHTML="Choose Image";
         }
     }
-    function setContent(){
+    function setContent(e){
         let content=document.getElementById('content');
         const fields=document.getElementsByClassName('field');
         for(let i=0; i<fields.length; i++){ 
@@ -115,6 +105,11 @@
             if(fields[i].classList.contains('image')){
                 if(fields[i].dataset.image=='unedited'){
                     content.value=content.value+`<img id="${fields[i].id}" />`;
+                }
+                else if(!fields[i].files[0].name.match(/.(jpg|jpeg|png|gif)$/i)){
+                    e.preventDefault();
+                    // alert('not an image');
+                    // if (!fileInput.files[0].name.match(/.(jpg|jpeg|png|gif)$/i))
                 }
                 else if(fields[i].files && fields[i].files[0]){
                     content.value=content.value+`<img id="${fields[i].id}" />`;
@@ -180,7 +175,7 @@
             else if(contentArray[i].includes('<p>')){
                 let section;
                 let h1Content='';
-                let paragraphContent=contentArray[i+1].replaceAll(/<p>|<\/p>/g,'');
+                let paragraphContent=contentArray[i].replaceAll(/<p>|<\/p>/g,'');
                 
                 section=addEditInputSection(h1Content,paragraphContent);
                 i=i+1;

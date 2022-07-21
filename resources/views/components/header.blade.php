@@ -1,4 +1,4 @@
-<header class="relative flex w-full justify-between md:px-10 sm:px-40 z-50 bg-white">
+<header class="relative flex w-full justify-between px-2 sm:px-4 md:px-20 lg:px-20  z-50 bg-white">
     <div class="flex">
         <div>
             <a href="/">

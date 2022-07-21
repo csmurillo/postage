@@ -23,9 +23,15 @@
     </div>
     <div class="flex-1 flex flex-col pt-5">
         <h1 class="text-2xl lg:text-3xl">Recently Created</h1>
-        <p class="flex-1 text-xl text-center italic">
-            No Posts
-        </p>
+        {{-- <p class="flex-1 text-xl text-center italic"> --}}
+            <div class="flex-1 flex flex-row sm:grid md:grid-cols-3 sm:grid-cols-2 gap-4">
+            {{-- No Posts --}}
+            @foreach($posts as $post)
+                {{-- card --}}
+                <x-card :post="$post"></x-card>
+            @endforeach
+            </div>
+        {{-- </p> --}}
     </div>
 </main>
 <script>

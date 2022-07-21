@@ -6,6 +6,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Exception;
 
 class PostsController extends Controller
 {    
@@ -106,7 +107,7 @@ class PostsController extends Controller
     }
 
     public function store()
-    {
+    {   
         $formData = request()->validate([
             'image' => ['image'],
             'image1' => ['image'],
@@ -117,7 +118,7 @@ class PostsController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'topic' => ['required', 'string', 'max:255'],
             'content' => ['required', 'string', 'max:4600'],
-        ]);    
+        ]);
 
         if(request()->hasFile('image')){
             $imagePath = request('image')->store('uploads','public');
@@ -143,6 +144,7 @@ class PostsController extends Controller
             $imagePath5 = request('image5')->store('uploads','public');
             $formData['image5']=$imagePath5;
         }
+
         $user= auth()->user();
 
         $formData['user_id']=$user->id;

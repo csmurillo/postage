@@ -1,13 +1,13 @@
 
 @props(['post'])
 
-<div class="card flex flex-col z-10 group hover:cursor-pointer" onclick="window.location.href = 'post/{{$post->id}}';">
+<div class="card flex flex-col z-10 group hover:cursor-pointer" onclick="cardClick(event);">
     {{-- <div class="text-xl">{{url()->current()=='http://localhost:8000/posts/search'}}</div> --}}
     <div class="relative h-48">
         <div class="absolute top-0 right-0 border-2 border-gray-100 rounded mt-2 mr-2 cursor-pointer z-50">
             @if (url()->current() != 'http://localhost:8000/posts/search')
             <div class="threedots disabled:group" onclick="editDropdown(this)" onmouseover="this.parentElement.parentElement.parentElement.classList.remove('group')" onmouseout="this.parentElement.parentElement.parentElement.classList.add('group')">
-                <x-bi-three-dots class="text-white w-6 h-6" />
+                <x-bi-three-dots id="three-dots" class="text-white w-6 h-6" />
             </div>
             @endif
             <div class="hidden">
@@ -37,6 +37,19 @@
 </div>
 
 <script>
+    function cardClick(event){
+        // alert(event.target.classList);
+        // alert('~~'+event.target.classList);
+
+        if(event.target.id=='three-dots'){
+            // alert(event.target.id);
+        }
+        else{
+            window.location.href = window.location.origin+'/post/{{$post->id}}';
+        }
+        // window.location.href = window.location.origin+'/post/{{$post->id}}';
+    }
+
     function handleThreeDotsOutsideClick(e){
         let threeDots=document.getElementsByClassName('threedots');
         let target=e.target;

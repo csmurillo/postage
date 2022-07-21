@@ -26,13 +26,21 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function () {
-    return view('account.index');
-});
+    // $posts = auth()->user()->posts->take(3)->get();
+    $posts=auth()->user()->posts->take(3);
+    return view('account.index',["posts"=>$posts]);
+})->middleware('auth');
 
 // settings
 Route::get('/settings', function () {
     return view('settings.index');
 });
+Route::get('/account', function () {
+    return view('settings/account/edit');
+});
+Route::get('/profile/{user}',function(){
+    return view('profile');
+})->middleware('auth');
 // settings routes
 Route::get('/account', function () {
     return view('settings/account/edit');
@@ -50,21 +58,38 @@ Route::get('/deleteAccount', function () {
 
 // ->middleware('auth');
 // Post url
-Route::get('/dashboard',[PostsController::class,'index']);
+Route::get('/dashboard',[PostsController::class,'index'])->middleware('auth');
 Route::get('/posts/search',[PostsController::class,'search']);
-Route::get('/post/create',[PostsController::class,'create']);
+Route::get('/post/create',[PostsController::class,'create'])->middleware('auth');
 Route::get('/post/{id}',[PostsController::class,'show']);
-Route::get('/post/{post}/edit',[PostsController::class,'edit']);
+Route::get('/post/{post}/edit',[PostsController::class,'edit'])->middleware('auth');
 /////////////////////////////////////////////////////
-Route::post('/post',[PostsController::class,'store']);
-Route::patch('/post/{post}',[PostsController::class,'update']);
-Route::delete('/post/{post}',[PostsController::class,'destroy']);
+Route::post('/post',[PostsController::class,'store'])->middleware('auth');
+Route::patch('/post/{post}',[PostsController::class,'update'])->middleware('auth');
+Route::delete('/post/{post}',[PostsController::class,'destroy'])->middleware('auth');
 
 // user
-Route::patch('user/{user}',[UserController::class,'update']);
-Route::patch('updatepassword/{user}',[UserController::class,'updatePassword']);
-Route::delete('user/{user}',[UserController::class,'destroy']);
+Route::patch('user/{user}',[UserController::class,'update'])->middleware('auth');
+Route::patch('updatepassword/{user}',[UserController::class,'updatePassword'])->middleware('auth');
+Route::delete('user/{user}',[UserController::class,'destroy'])->middleware('auth');
 
 // profile
-Route::patch('/profile/{user}',[ProfileController::class,'update']);
+Route::patch('/profile/{user}',[ProfileController::class,'update'])->middleware('auth');
 
+
+
+// legal
+Route::get('/terms/services', function () {
+    return view('/legal/terms-services');
+});
+
+// company
+Route::get('/about', function () {
+    return view('/company/about-us');
+});
+Route::get('/team', function () {
+    return view('/company/team');
+});
+Route::get('/careers', function () {
+    return view('/company/careers');
+});
