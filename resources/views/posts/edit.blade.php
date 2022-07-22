@@ -103,13 +103,13 @@
                 }
             }
             if(fields[i].classList.contains('image')){
-                if(fields[i].dataset.image=='unedited'){
-                    content.value=content.value+`<img id="${fields[i].id}" />`;
-                }
-                else if(!fields[i].files[0].name.match(/.(jpg|jpeg|png|gif)$/i)){
+                if(!fields[i].files[0].name.match(/.(jpg|jpeg|png|gif)$/i)){
                     e.preventDefault();
-                    // alert('not an image');
+                    alert('not an image');
                     // if (!fileInput.files[0].name.match(/.(jpg|jpeg|png|gif)$/i))
+                }
+                else if(fields[i].dataset.image=='unedited'){
+                    content.value=content.value+`<img id="${fields[i].id}" />`;
                 }
                 else if(fields[i].files && fields[i].files[0]){
                     content.value=content.value+`<img id="${fields[i].id}" />`;

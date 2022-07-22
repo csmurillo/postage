@@ -11,7 +11,7 @@
             </div>
         </div>
     </div>
-    <form id="create-form" action="/post" enctype="multipart/form-data" method="post" onsubmit="setContent();">
+    <form id="create-form" action="/post" enctype="multipart/form-data" method="post" onsubmit="setContent(event);">
         @csrf
         <div class="flex gap-2 mb-4">
             <label for="image" class="text-xl">Cover Image:</label>
@@ -98,7 +98,8 @@
             inputFile.parentElement.children[0].innerHTML="Choose Image";
         }
     }
-    function setContent(){
+    function setContent(e){
+        // alert(e.target);
         let content=document.getElementById('content');
         const fields=document.getElementsByClassName('field');
         for(let i=0; i<fields.length; i++){ 
@@ -113,7 +114,17 @@
                 }
             }
             if(fields[i].classList.contains('image')){
-                if(fields[i].files && fields[i].files[0]){
+                if(!fields[i].files[0].name.match(/.(jpg|jpeg|png|gif)$/i)){
+                    // alert(fields[i].classList);
+                    fields[i].parentElement.parentElement.classList.add('border-red-500');
+                    fields[i].parentElement.parentElement.classList.add('border-4');
+                    
+                    fields[i].parentElement.parentElement.parentElement.append('Not Valid Image');
+                    // alert(fields[i].classList);
+                    e.preventDefault();
+                    alert('not an image');
+                }
+                else if(fields[i].files && fields[i].files[0]){
                     content.value=content.value+`<img id="${fields[i].id}" />`;
                 }
             }
