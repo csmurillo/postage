@@ -1,15 +1,15 @@
-<footer class="bg-black h-72 flex text-white justify-around pt-5 sm:justify-between px-4 sm:px-4 md:px-20 lg:px-20 sm:h-56">
+<footer class="bg-black h-72 flex text-white justify-around sm:justify-between px-4 sm:px-4 md:px-20 lg:px-20 sm:h-56 pt-8 pb-12">
     <div class="sm:flex sm:gap-10">
         <div class="mb-4">
             <h1 class="text-xl">Company</h1>
             <ul class="pl-1">
-                <li>
+                <li class="hover:underline">
                     <a href="/about">About Us</a>
                 </li>
-                <li>
+                <li class="hover:underline">
                     <a href="/team">Team</a>
                 </li>
-                <li>
+                <li class="hover:underline">
                     <a href="/careers">Careers</a>
                 </li>
 
@@ -18,7 +18,7 @@
         <div>
             <h1 class="text-xl">Legal</h1>
             <ul>
-                <li>
+                <li class="hover:underline">
                     <a href="/terms/services">Terms & Services</a>
                 </li>
             </ul>
