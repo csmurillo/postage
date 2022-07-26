@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="flex justify-center">
-    <h1 class="text-3xl md:text-4xl mb-10">Delete Account</h1>
+<div class="flex flex-col justify-center">
+    <h1 class="text-3xl md:text-4xl mb-10 w-full text-center">Delete Account</h1>
     <form action="/user/{{ Auth::user()->id }}" enctype="multipart/form-data" method="post">
         @csrf
         @method('DELETE')

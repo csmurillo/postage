@@ -1,4 +1,4 @@
-<div class="px-4 py-20">
+<div class="px-4 sm:px-4 md:px-20 lg:px-20 py-20">
     <h1 class="text-3xl mb-4">Popular</h1>
     {{-- <div class="md:flex md:gap-4"> --}}
     <div class="lg:grid-cols-3 lg:gap-4 sm:grid md:grid-cols-2 md:gap-4">

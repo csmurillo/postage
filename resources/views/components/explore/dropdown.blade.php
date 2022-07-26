@@ -1,4 +1,4 @@
-<div id="explore-dropdown" class="hidden sm:hidden absolute top-0 left-0 z-30 w-full px-10 border-t-2">
+<div id="explore-dropdown" class="hidden sm:hidden absolute top-0 left-0 w-full px-10 border-t-2 z-[999999999]">
     <div class="bg-white w-full grid lg:grid-cols-4 gap-4 sm:grid-cols-3">
         <div>
             <h2 class="text-lg">Autonomous Driving</h2>

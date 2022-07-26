@@ -53,6 +53,9 @@
         inputFile.addEventListener('change', function onChange(){
             setFilePath(this,label);    
         });
+        inputFile.addEventListener('click', function onChange(){
+            updateImage(this);
+        });
 
         div.append(closeBtn);
         div.append(container);
@@ -169,6 +172,12 @@
             const imageDiv=getDivNoImageFound();
             inputParentDiv.insertBefore(imageDiv,inputParentDiv.firstChild);
             label.innerHTML="Choose Image";
+        }
+    }
+    function updateImage(field){
+        let error=document.getElementById(field.id+'-error');
+        if(error){
+            error.remove();
         }
     }
     // end addImageSection

@@ -10,8 +10,10 @@
             </div>
         </div>
         <div class="border-l-4 border-blue-500 pl-2">
-            <p class="text-lg font-Rajdhani">Author</p>
-            <p>{{ucfirst($post->user->username)}}</p>
+            <a href="/profile/{{$post->user->id}}">
+                <p class="text-lg font-Rajdhani">Author</p>
+                <p>{{ucfirst($post->user->username)}}</p>
+            </a>
         </div>
     </div>
 </div>

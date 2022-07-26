@@ -11,7 +11,7 @@
         }
     }
 </script>
-<div id="explore-dropdown-mb" class="hidden sm:hidden bg-white absolute top-0 z-30 border-t-2 border-b-2 border-r-2 border-l-gray-800 rounded-br">
+<div id="explore-dropdown-mb" class="hidden sm:hidden bg-white absolute top-0 border-t-2 border-b-2 border-r-2 border-l-gray-800 rounded-br z-[999999999]">
     <div class="relative py-4 border-b-[1px] border-l-gray-900">
         <div class="flex justify-between mx-10 hover:cursor-pointer z-50" onclick="mobileDropdown(this)">
             <p class="flex items-center hover:underline">Autonomous Driving</p>

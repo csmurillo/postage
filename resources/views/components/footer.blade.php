@@ -1,4 +1,4 @@
-<footer class="bg-black h-72 flex text-white justify-around pt-5 sm:justify-between sm:px-10 sm:h-56">
+<footer class="bg-black h-72 flex text-white justify-around pt-5 sm:justify-between px-4 sm:px-4 md:px-20 lg:px-20 sm:h-56">
     <div class="sm:flex sm:gap-10">
         <div class="mb-4">
             <h1 class="text-xl">Company</h1>

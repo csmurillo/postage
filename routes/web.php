@@ -5,6 +5,7 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
+use App\Models\Post;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,8 +39,13 @@ Route::get('/settings', function () {
 Route::get('/account', function () {
     return view('settings/account/edit');
 });
-Route::get('/profile/{user}',function(){
-    return view('profile');
+Route::get('/profile/{id}',function($id){
+    $user = User::findOrFail($id);   
+    $posts = $user->posts;  
+    return view('profile',[
+        'user' => $user,
+        'posts' => $posts
+    ]);
 })->middleware('auth');
 // settings routes
 Route::get('/account', function () {
