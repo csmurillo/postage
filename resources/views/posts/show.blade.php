@@ -1,16 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="px-96 pt-2 h-full">
+<div class="px-4 sm:px-28 md:px-32 lg:px-72 xl:px-96 pt-2 h-full">
     <div class="flex flex-col h-full justify-between">
         <div class="flex-1">
             <h1 class="text-3xl underline">{{ucfirst($post->title)}}</h1>
             <div id="content-container">
-                
             </div>
         </div>
         <div class="border-l-4 border-blue-500 pl-2">
-            <a href="/profile/{{$post->user->id}}">
+            <a href="/profile/{{$post->user->id}}" class="inline-block">
                 <p class="text-lg font-Rajdhani">Author</p>
                 <p>{{ucfirst($post->user->username)}}</p>
             </a>
@@ -49,7 +48,9 @@
     function setupContentShow(){
         const contentContainer = document.getElementById('content-container');
         var content = {!! json_encode($post['content']) !!};    
-        var contentArray = content.match(/<h1>.*?<\/h1>|<p>.*?<\/p>|<img.*?\/>/g);
+        var contentArray = content.match(/<h1>.*?<\/h1>|<p>.*?<\/p>|<p>.*?(\r\n|\r|\n).*?<\/p>|<img.*?\/>/g);
+        // alert(content);
+        // alert(contentArray);
         let i=0;
         while(i<contentArray.length){
             if(contentArray[i].includes('<h1>')){
@@ -67,6 +68,7 @@
                 p.innerHTML=pContent;
                 p.classList.add('text-lg');
                 p.classList.add('mb-2');
+                p.classList.add('break-all');
                 contentContainer.append(p);
             }
             else if(contentArray[i].includes('<img')){

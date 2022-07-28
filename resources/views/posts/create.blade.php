@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="relative flex flex-col sm:px-5 lg:px-72">
+<div class="relative flex flex-col px-4 sm:px-10 md:px-20 lg:px-48 xl:px-72">
     <div id="preview-create" class="hidden">
         <div class="mb-5">
             <input class="text-lg py-1 px-3 border rounded text-black bg-white" type="button" value="Back" onclick="back()"/>
@@ -140,6 +140,7 @@
             if(fields[i].classList.contains('paragraph')){
                 if(fields[i].value){
                     content.value=content.value+`<p>${fields[i].value}</p>`;
+                    alert(content.value);
                 }
                 else{
                     let error=document.getElementById(fields[i].name+'-error');

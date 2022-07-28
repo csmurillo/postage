@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="relative flex flex-col sm:px-5 lg:px-72">
+<div class="relative flex flex-col px-4 sm:px-10 md:px-20 lg:px-48 xl:px-72">
     <div id="preview-create" class="hidden">
         <div class="mb-5">
             <input class="text-lg py-1 px-3 border rounded text-black bg-white" type="button" value="Back" onclick="back()"/>
@@ -233,7 +233,7 @@
         
         let title = document.getElementById('title');
         let topic = document.getElementById('topic');
-        alert(topic.value);
+        // alert(topic.value);
         if(title.value.length==0){
             title.classList.add('border-2');
             title.classList.add('border-red-500');
@@ -241,7 +241,7 @@
             e.preventDefault();
         }
         if(!topic.value){
-            alert('inside');
+            // alert('inside');
             topic.classList.add('border-2');
             topic.classList.add('border-red-500');
             topic.classList.add('rounded');
@@ -293,7 +293,11 @@
                             div.classList.add('text-red-500');
                             div.innerHTML='No Image';
                             fields[i].parentElement.parentElement.parentElement.append(div);
-                        }
+                        }                   
+                        else if(fields[i].dataset.image=='unedited'){
+                            content.value=content.value+`<img id="${fields[i].id}" />`;
+                            continue;
+                        } 
                         e.preventDefault();
                         continue;
                     }

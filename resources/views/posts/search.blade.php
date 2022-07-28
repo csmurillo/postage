@@ -1,19 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="px-10 md:px-48">
+<div class=" px-4 sm:px-4 md:px-28 lg:px-48">
     <div class="w-full flex xl:flex-row flex-col">
-        <div class="w-full flex justify-end xl:hidden">
+        <div class="px-10 w-full flex justify-end xl:hidden">
             <button onclick="toggleFilters()">Filters</button>
         </div>
-        <div id="filters" class="w-full right-0 hidden xl:w-2/12 xl:block xl:relative z-50 bg-white">
-            <div>
+        <div id="filters" class="w-full right-0 hidden xl:w-2/12 xl:block xl:relative bg-white z-[999]">
+            <div class="mx-10 md:mx-28 lg:mx-56 xl:mx-0 md:border-none mb-2">
                 <h2 class="text-xl mb-3 border-b-2">Search</h2>
-                <div>
-                    <input id="search" class="border" type="text" name="search"/>
+                <div class="w-full">
+                    <input id="search" class="border w-full" type="text" name="search"/>
                 </div>
             </div>
-            <div class="mx-10 border md:mx-0 md:border-none">
+            <div class="mx-10 md:mx-28 lg:mx-56 xl:mx-0 md:border-none mb-2">
                 <div>
                     <h2 class="text-xl mb-3 border-b-2">Category</h2>
                     <div>
@@ -42,7 +42,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mx-10 border md:mx-0 md:border-none">
+            <div class="mx-10 md:mx-28 lg:mx-56 xl:mx-0 md:border-none mb-2">
                 <h2 class="text-xl mb-3 border-b-2">Topics</h2>
                 <div>
                     <input type="checkbox" id="commaAi" name="topics[]">
@@ -119,7 +119,7 @@
         </div>
         <div class="flex-1 px-6">
             <h1 id="search-name" class="text-xl">All</h1>
-            <div id="posts" class="sm:grid md:grid-cols-3 sm:grid-cols-2 gap-4">
+            <div id="posts" class="sm:grid md:grid-cols-3 sm:grid-cols-2 flex flex-col gap-4 mb-4">
             @foreach($posts as $post)
                 <x-card :post="$post"></x-card>
             @endforeach
@@ -146,9 +146,10 @@
         var searchName = document.getElementById('search-name');
 
         let url = new URL(window.location.href);
-        let category=url.searchParams.get("category");
-        let topics=url.searchParams.get("topic").split(',');
-        let search=url.searchParams.get("search");
+        let category=url.searchParams.get("category")?url.searchParams.get("category"):'';
+        let topics=url.searchParams.get("topic")?url.searchParams.get("topic").split(','):'';
+        let search=url.searchParams.get("search")?url.searchParams.get("search"):'';
+
         // topics checkbox
         for(var i=0; i<topics.length;i++){
             for(var j=0; j<topicsCheckbox.length;j++){
@@ -211,9 +212,7 @@
                 topic=topic+topics[i].id+',';
             }
         }
-
         if(searchInput.value.length>0){
-            alert('it is greater then 0'+searchInput.value);
             url.searchParams.append('search',searchInput.value);
         }
         if(category.length>0){
@@ -223,6 +222,9 @@
             url.searchParams.append('topic', topic);
         }
         if(category.length!=0 || topic.length!=0||searchInput.value.length>0){
+            window.location.href=url;
+        }
+        if(searchInput.value.length==0 && category.length==0 && topic.length==0){
             window.location.href=url;
         }
     }

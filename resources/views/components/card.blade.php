@@ -1,16 +1,13 @@
-
 @props(['post'])
-
-<div class="card flex flex-col z-10 group hover:cursor-pointer" onclick="cardClick(event);">
-    {{-- <div class="text-xl">{{url()->current()=='http://localhost:8000/posts/search'}}</div> --}}
+<div class="card flex flex-col z-[1] group hover:cursor-pointer" onclick="@if(url()->current() == 'http://localhost:8000/dashboard') cardClick(event); window.location.href = window.location.origin+'/post/{{$post->id}}' @else window.location.href = window.location.origin+'/post/{{$post->id}}'  @endif">
     <div class="relative h-48">
-        <div class="absolute top-0 right-0 border-2 border-gray-100 rounded mt-2 mr-2 cursor-pointer z-50">
-            @if (url()->current() != 'http://localhost:8000/posts/search')
+        <div class="absolute top-0 right-0 border-2 border-gray-100 rounded mt-2 mr-2 cursor-pointer">
+            @if (url()->current() == 'http://localhost:8000/dashboard')
             <div class="threedots disabled:group" onclick="editDropdown(this)" onmouseover="this.parentElement.parentElement.parentElement.classList.remove('group')" onmouseout="this.parentElement.parentElement.parentElement.classList.add('group')">
                 <x-bi-three-dots id="three-dots" class="text-white w-6 h-6" />
             </div>
             @endif
-            <div class="hidden">
+            <div class="hidden z-[999999]">
                 <div class="absolute bg-white px-4 -ml-14 mt-[3px] rounded" onclick="">
                     <div class="border-b-2">
                         <a class="text-black text-lg" href="/post/{{$post->id}}/edit">Edit</a>
@@ -38,15 +35,14 @@
 
 <script>
     function cardClick(event){
-        // alert(event.target.classList);
-        // alert('~~'+event.target.classList);
-
+        var postId = {!! json_encode($post->id) !!};
         if(event.target.id=='three-dots'){
             // alert(event.target.id);
+            e.preventDefault();
         }
-        else{
-            window.location.href = window.location.origin+'/post/{{$post->id}}';
-        }
+        // else{
+        //     window.location.href = window.location.origin+'/post/{{$post->id}}';
+        // }
         // window.location.href = window.location.origin+'/post/{{$post->id}}';
     }
 
