@@ -28,7 +28,10 @@ Route::get('/', function () {
 
 Route::get('/home', function () {
     // $posts = auth()->user()->posts->take(3)->get();
-    $posts=auth()->user()->posts->take(3);
+    // $posts=auth()->user()->posts->take(3);
+    $user_id=auth()->user()->id;
+    $posts=Post::latest()->where('user_id',$user_id)->take(3)->get();
+
     return view('account.index',["posts"=>$posts]);
 })->middleware('auth');
 
@@ -42,11 +45,12 @@ Route::get('/account', function () {
 Route::get('/profile/{id}',function($id){
     $user = User::findOrFail($id);   
     $posts = $user->posts;  
+
     return view('profile',[
         'user' => $user,
         'posts' => $posts
     ]);
-})->middleware('auth');
+});
 // settings routes
 Route::get('/account', function () {
     return view('settings/account/edit');

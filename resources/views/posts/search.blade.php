@@ -6,7 +6,7 @@
         <div class="px-10 w-full flex justify-end xl:hidden">
             <button onclick="toggleFilters()">Filters</button>
         </div>
-        <div id="filters" class="w-full right-0 hidden xl:w-2/12 xl:block xl:relative bg-white z-[999]">
+        <div id="filters" class="w-full right-0 hidden xl:w-2/12 xl:block xl:relative bg-white z-[2]">
             <div class="mx-10 md:mx-28 lg:mx-56 xl:mx-0 md:border-none mb-2">
                 <h2 class="text-xl mb-3 border-b-2">Search</h2>
                 <div class="w-full">

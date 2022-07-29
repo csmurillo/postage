@@ -1,12 +1,11 @@
 @props(['post'])
-<div class="card flex flex-col z-[1] group hover:cursor-pointer" onclick="@if(url()->current() == 'http://localhost:8000/dashboard') cardClick(event); window.location.href = window.location.origin+'/post/{{$post->id}}' @else window.location.href = window.location.origin+'/post/{{$post->id}}'  @endif">
-    <div class="relative h-48">
+<div class="card relative flex flex-col z-[1] group hover:cursor-pointer" onclick="@if (str_contains(url()->current(), '/dashboard')) cardClick(event,'/post/{{$post->id}}');@else window.location.href = window.location.origin+'/post/{{$post->id}}'  @endif">
+    <div class="absolute top-0 right-1 z-[10]">
         <div class="absolute top-0 right-0 border-2 border-gray-100 rounded mt-2 mr-2 cursor-pointer">
             @if (url()->current() == 'http://localhost:8000/dashboard')
-            <div class="threedots disabled:group" onclick="editDropdown(this)" onmouseover="this.parentElement.parentElement.parentElement.classList.remove('group')" onmouseout="this.parentElement.parentElement.parentElement.classList.add('group')">
-                <x-bi-three-dots id="three-dots" class="text-white w-6 h-6" />
+            <div id="three-dots-container" class="threedots disabled:group" onclick="editDropdown(this)" onmouseover="this.parentElement.parentElement.parentElement.classList.remove('group')" onmouseout="this.parentElement.parentElement.parentElement.classList.add('group')">
+                <x-bi-three-dots id="three-dots" class="text-white w-6 h-6" onclick="editDropdown(this)" />
             </div>
-            @endif
             <div class="hidden z-[999999]">
                 <div class="absolute bg-white px-4 -ml-14 mt-[3px] rounded" onclick="">
                     <div class="border-b-2">
@@ -21,7 +20,10 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
+    </div>
+    <div class="relative h-48">
         <img class="rounded-t-sm w-full h-full" src="{{$post->image ? asset('storage/' . $post->image) : asset('images/defaultImage.png') }}"
          height="0px" width="0px" />
     </div>
@@ -34,15 +36,17 @@
 </div>
 
 <script>
-    function cardClick(event){
+    function cardClick(event,urlDirect){
+        // alert(event.target)
         var postId = {!! json_encode($post->id) !!};
-        if(event.target.id=='three-dots'){
-            // alert(event.target.id);
-            e.preventDefault();
+        if(event.target.toString()=='[object SVGSVGElement]'||event.target.toString()=='[object SVGPathElement]'){
+            event.preventDefault();
         }
-        // else{
-        //     window.location.href = window.location.origin+'/post/{{$post->id}}';
-        // }
+        else{
+            // alert('URL');
+            // alert(urlDirect);
+            window.location.href = window.location.origin+urlDirect;
+        }
         // window.location.href = window.location.origin+'/post/{{$post->id}}';
     }
 
