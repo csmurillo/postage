@@ -22,39 +22,20 @@
         </div>
     </div>
     <div class="flex-1 flex flex-col pt-5">
-        <h1 class="text-2xl lg:text-3xl">Recently Created</h1>
+        <h1 class="text-2xl lg:text-3xl mb-2">Recently Created</h1>
+        @if (count($posts)>0)
             <div class="sm:grid md:grid-cols-3 sm:grid-cols-2 flex flex-col gap-4">
-            {{-- No Posts --}}
-            @foreach($posts as $post)
-                {{-- card --}}
-                <x-card :post="$post"></x-card>
-            @endforeach
+                @foreach($posts as $post)
+                    {{-- card --}}
+                    <x-card :post="$post"></x-card>
+                @endforeach
             </div>
-        {{-- </p> --}}
+        @else
+            <p class="w-full text-center text-xl py-10">No Posts</p>
+        @endif
     </div>
 </main>
-<script>
-    function editDescription(){
-        const description=document.getElementById('description-value');
-        const updateDescription=document.getElementById('update-description');
-
-        if(description.classList.contains('hidden')){
-            description.classList.remove('hidden');
-            description.classList.add('flex');
-            updateDescription.classList.remove('flex');
-            updateDescription.classList.add('hidden');
-        }
-        else{
-            description.classList.remove('flex');
-            description.classList.add('hidden');
-            updateDescription.classList.remove('hidden');
-            updateDescription.classList.add('flex');
-            updateDescription.classList.add('flex-col');
-            updateDescription.classList.add('justify-between');
-        }
-    }
-</script>
-
+<script src="{{ asset('js/home/index.js') }}"></script>
 @endsection
 
 

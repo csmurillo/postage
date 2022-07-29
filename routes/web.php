@@ -21,7 +21,7 @@ Auth::routes();
 
 // Main
 Route::get('/', function () {
-    return view('welcome');
+    return view('main');
 });
 
 // User Home

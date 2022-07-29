@@ -33,16 +33,7 @@
         </div>
     </div>
 </main>
-
-
 @endsection
-
-
-
-
-
-
-
 
 
 
