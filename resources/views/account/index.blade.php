@@ -23,7 +23,6 @@
     </div>
     <div class="flex-1 flex flex-col pt-5">
         <h1 class="text-2xl lg:text-3xl">Recently Created</h1>
-        {{-- <p class="flex-1 text-xl text-center italic"> --}}
             <div class="sm:grid md:grid-cols-3 sm:grid-cols-2 flex flex-col gap-4">
             {{-- No Posts --}}
             @foreach($posts as $post)

@@ -17,40 +17,54 @@ use App\Models\Post;
 |
 */
 
-// Auth::routes();
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Auth::routes();
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// Main
 Route::get('/', function () {
     return view('welcome');
 });
 
+// User Home
 Route::get('/home', function () {
-    // $posts = auth()->user()->posts->take(3)->get();
-    // $posts=auth()->user()->posts->take(3);
     $user_id=auth()->user()->id;
     $posts=Post::latest()->where('user_id',$user_id)->take(3)->get();
-
     return view('account.index',["posts"=>$posts]);
 })->middleware('auth');
+
+// Update User Profile
+Route::patch('/profile/{user}',[ProfileController::class,'update'])->middleware('auth');
+
+// User Profile
+Route::get('/profile/{id}',function($id){
+    $user = User::findOrFail($id);   
+    $posts = $user->posts;
+    return view('profile',['user' => $user,'posts' => $posts]);
+});
+
+// Search Post
+Route::get('/posts/search',[PostsController::class,'search']);
+
+// Post Templates
+Route::get('/dashboard',[PostsController::class,'index'])->middleware('auth');
+Route::get('/post/{id}',[PostsController::class,'show']);
+Route::get('/post/create',[PostsController::class,'create'])->middleware('auth');
+Route::get('/post/{post}/edit',[PostsController::class,'edit'])->middleware('auth');
+
+// Post Actions
+Route::post('/post',[PostsController::class,'store'])->middleware('auth');
+Route::patch('/post/{post}',[PostsController::class,'update'])->middleware('auth');
+Route::delete('/post/{post}',[PostsController::class,'destroy'])->middleware('auth');
+
+// User Account updates/delete
+Route::patch('user/{user}',[UserController::class,'update'])->middleware('auth');
+Route::patch('updatepassword/{user}',[UserController::class,'updatePassword'])->middleware('auth');
+Route::delete('user/{user}',[UserController::class,'destroy'])->middleware('auth');
 
 // settings
 Route::get('/settings', function () {
     return view('settings.index');
 });
-Route::get('/account', function () {
-    return view('settings/account/edit');
-});
-Route::get('/profile/{id}',function($id){
-    $user = User::findOrFail($id);   
-    $posts = $user->posts;  
 
-    return view('profile',[
-        'user' => $user,
-        'posts' => $posts
-    ]);
-});
 // settings routes
 Route::get('/account', function () {
     return view('settings/account/edit');
@@ -58,39 +72,10 @@ Route::get('/account', function () {
 
 Route::get('/changePassword', function () {
     return view('settings/change-password/index');
-    // return view('auth/passwords/reset');
 });
 
 Route::get('/deleteAccount', function () {
     return view('settings/delete-account/index');
-});
-// settings routes end
-
-// ->middleware('auth');
-// Post url
-Route::get('/dashboard',[PostsController::class,'index'])->middleware('auth');
-Route::get('/posts/search',[PostsController::class,'search']);
-Route::get('/post/create',[PostsController::class,'create'])->middleware('auth');
-Route::get('/post/{id}',[PostsController::class,'show']);
-Route::get('/post/{post}/edit',[PostsController::class,'edit'])->middleware('auth');
-/////////////////////////////////////////////////////
-Route::post('/post',[PostsController::class,'store'])->middleware('auth');
-Route::patch('/post/{post}',[PostsController::class,'update'])->middleware('auth');
-Route::delete('/post/{post}',[PostsController::class,'destroy'])->middleware('auth');
-
-// user
-Route::patch('user/{user}',[UserController::class,'update'])->middleware('auth');
-Route::patch('updatepassword/{user}',[UserController::class,'updatePassword'])->middleware('auth');
-Route::delete('user/{user}',[UserController::class,'destroy'])->middleware('auth');
-
-// profile
-Route::patch('/profile/{user}',[ProfileController::class,'update'])->middleware('auth');
-
-
-
-// legal
-Route::get('/terms/services', function () {
-    return view('/legal/terms-services');
 });
 
 // company
@@ -102,4 +87,9 @@ Route::get('/team', function () {
 });
 Route::get('/careers', function () {
     return view('/company/careers');
+});
+
+// legal
+Route::get('/terms/services', function () {
+    return view('/legal/terms-services');
 });
