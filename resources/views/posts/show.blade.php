@@ -49,8 +49,7 @@
         const contentContainer = document.getElementById('content-container');
         var content = {!! json_encode($post['content']) !!};    
         var contentArray = content.match(/<h1>.*?<\/h1>|<p>.*?<\/p>|<p>.*?(\r\n|\r|\n).*?<\/p>|<img.*?\/>/g);
-        // alert(content);
-        // alert(contentArray);
+
         let i=0;
         while(i<contentArray.length){
             if(contentArray[i].includes('<h1>')){

@@ -22,15 +22,16 @@
     </div>
     <div class="flex-1 flex flex-col pt-5">
         <h1 class="text-2xl lg:text-3xl">All Posts</h1>
-        {{-- <p class="flex-1 text-xl text-center italic">
-            No Posts
-        </p> --}}
-        <div class="sm:grid md:grid-cols-3 sm:grid-cols-2 gap-4 flex-col space-y-6 sm:space-y-0">
-            @foreach($posts as $post)
-                {{-- card --}}
-                <x-card :post="$post"></x-card>
-            @endforeach
-        </div>
+        @if (count($posts)>0)
+            <div class="sm:grid md:grid-cols-3 sm:grid-cols-2 gap-4 flex-col space-y-6 sm:space-y-0">
+                @foreach($posts as $post)
+                    {{-- card --}}
+                    <x-card :post="$post"></x-card>
+                @endforeach
+            </div>
+        @else
+            <p class="w-full text-center text-xl py-10">No Posts</p>
+        @endif
     </div>
 </main>
 @endsection
