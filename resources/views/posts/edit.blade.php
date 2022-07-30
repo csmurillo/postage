@@ -66,108 +66,22 @@
     </form>
 </div>
 
-<script src="{{ asset('js/setImageSection.js') }}"></script>
-<script src="{{ asset('js/setInputSection.js') }}"></script>
-<script src="{{ asset('js/editImageSection.js') }}"></script>
-<script src="{{ asset('js/editInputSection.js') }}"></script>
-<script src="{{ asset('js/previewPost.js') }}"></script>
+<script src="{{ asset('js/posts/edit/index.js') }}"></script>
+<script src="{{ asset('js/posts/inputManager.js') }}"></script>
+<script src="{{ asset('js/posts/setImageSection.js') }}"></script>
+<script src="{{ asset('js/posts/setInputSection.js') }}"></script>
+<script src="{{ asset('js/posts/editImageSection.js') }}"></script>
+<script src="{{ asset('js/posts/editInputSection.js') }}"></script>
+<script src="{{ asset('js/posts/previewPost.js') }}"></script>
+
 @endsection
 <script>
-    function fileCoverImage(inputFile){
-        var reader  = new FileReader();
-        reader.onloadend = function () {
-            if(reader.result){
-            inputFile.parentElement.children[0].innerHTML=inputFile.files[0].name;;
-        }
-            
-        }
-        if(inputFile.files && inputFile.files[0]){
-            reader.readAsDataURL(inputFile.files[0]);
-        }
-        else{
-            inputFile.parentElement.children[0].innerHTML="Choose Image";
-        }
-    }
-    // function setContent(e){
-    //     let content=document.getElementById('content');
-    //     const fields=document.getElementsByClassName('field');
-    //     for(let i=0; i<fields.length; i++){ 
-    //         if(fields[i].classList.contains('title')){
-    //             if(fields[i].value){
-    //                 content.value=content.value+`<h1>${fields[i].value}</h1>`;
-    //             }
-    //         }
-    //         if(fields[i].classList.contains('paragraph')){
-    //             if(fields[i].value){
-    //                 content.value=content.value+`<p>${fields[i].value}</p>`;
-    //             }
-    //         }
-    //         if(fields[i].classList.contains('image')){
-    //             if(!fields[i].files[0].name.match(/.(jpg|jpeg|png|gif)$/i)){
-    //                 let error=document.getElementById(fields[i].id+'-error');
-    //                 alert(error);
-    //                 if(error==null){
-    //                     const div=document.createElement('div');
-    //                     div.id=fields[i].id+'-error';
-    //                     div.classList.add('text-red-500');
-    //                     div.innerHTML='Not Valid Image Type';
-    //                     fields[i].parentElement.parentElement.parentElement.append(div);
-    //                 }
-    //                 e.preventDefault();
-    //             }
-    //             else if((fields[i].files[0].size/1024/1024) > 2 ){
-    //                 let error=document.getElementById(fields[i].id+'-error');
-    //                 if(error==null){
-    //                     const div=document.createElement('div');
-    //                     div.id=fields[i].id+'-error';
-    //                     div.classList.add('text-red-500');
-    //                     div.innerHTML='Not Valid Image File Size Must Be Less Than 2GB';
-    //                     fields[i].parentElement.parentElement.parentElement.append(div);
-    //                 }
-    //                 e.preventDefault();
-    //             }
-    //             else if(fields[i].dataset.image=='unedited'){
-    //                 content.value=content.value+`<img id="${fields[i].id}" />`;
-    //             }
-    //             else if(fields[i].files && fields[i].files[0]){
-    //                 content.value=content.value+`<img id="${fields[i].id}" />`;
-    //             }
-    //         }
-    //     }
-    //     alert(content.value);
-    // }
-    // edit variables
-    function getImageUrl(id){        
-        var image1 = {!! json_encode($post['image1']) !!};
-        var image2 = {!! json_encode($post['image2']) !!};
-        var image3 = {!! json_encode($post['image3']) !!};
-        var image4 = {!! json_encode($post['image4']) !!};
-        var image5 = {!! json_encode($post['image5']) !!};
-
-        if(id=="image1"){
-            return image1;
-        }
-        else if(id=="image2"){
-            return image2;
-        }
-        else if(id=="image3"){
-            return image3;
-        }
-        else if(id=="image4"){
-            return image4;
-        }
-        else if(id=="image5"){
-            return image5;
-        }
-        else{
-            return null;
-        }
-    }
-    //////////////////////////////////////////////////////////////////////////
+    window.onload=()=>{
+        setupEditForm();
+    };
     function setupEditForm(){
         var content = {!! json_encode($post['content']) !!};    
-        var contentArray = content.match(/<h1>.*?<\/h1>|<p>.*?<\/p>|<img.*?\/>/g);
-        // alert(contentArray);
+        var contentArray = content.match(/<h1>.*?<\/h1>|<p>.*?<\/p>|<p>.*?(\r\n|\r|\n).*?<\/p>|<img.*?\/>/g);
         const contentContainer = document.getElementById('content-container');
 
         let i=0;
@@ -211,126 +125,31 @@
             }  
         }
     }
+    function getImageUrl(id){        
+        var image1 = {!! json_encode($post['image1']) !!};
+        var image2 = {!! json_encode($post['image2']) !!};
+        var image3 = {!! json_encode($post['image3']) !!};
+        var image4 = {!! json_encode($post['image4']) !!};
+        var image5 = {!! json_encode($post['image5']) !!};
 
-    window.onload=()=>{
-        setupEditForm();
-    };
-    // used in create
-    function updateTitle(title){
-        title.classList.remove('border-2');
-        title.classList.remove('border-red-500');
-        title.classList.remove('rounded');
-    }
-    function updateTopic(topic){
-        topic.classList.remove('border-2');
-        topic.classList.remove('border-red-500');
-        topic.classList.remove('rounded');
-    }
-    function setContent(e){
-        let content=document.getElementById('content');
-        content.value="";
-        const fields=document.getElementsByClassName('field');
-        
-        let title = document.getElementById('title');
-        let topic = document.getElementById('topic');
-        // alert(topic.value);
-        if(title.value.length==0){
-            title.classList.add('border-2');
-            title.classList.add('border-red-500');
-            title.classList.add('rounded');
-            e.preventDefault();
+        if(id=="image1"){
+            return image1;
         }
-        if(!topic.value){
-            // alert('inside');
-            topic.classList.add('border-2');
-            topic.classList.add('border-red-500');
-            topic.classList.add('rounded');
-            e.preventDefault();
+        else if(id=="image2"){
+            return image2;
         }
-        for(let i=0; i<fields.length; i++){ 
-            if(fields[i].classList.contains('title')){
-                if(fields[i].value){
-                    content.value=content.value+`<h1>${fields[i].value}</h1>`;
-                }
-            }
-            if(fields[i].classList.contains('paragraph')){
-                if(fields[i].value){
-                    content.value=content.value+`<p>${fields[i].value}</p>`;
-                }
-                else{
-                    let error=document.getElementById(fields[i].name+'-error');
-                    if(error==null){
-                        const div=document.createElement('div');
-                        div.id=fields[i].name+'-error';
-                        div.classList.add('text-red-500');
-                        div.innerHTML='Please Provide Content';
-                        fields[i].parentElement.parentElement.append(div);
-                        e.preventDefault();
-                    }
-                }
-            }
-            if(fields[i].classList.contains('image')){
-                if(fields[i].files.length==0){
-                    // check if file exist to be edit
-                    let validImage=getImageUrl(fields[i].id);
-                    if(validImage==null){
-                        let error=document.getElementById(fields[i].id+'-error');
-                        if(error==null){
-                            const div=document.createElement('div');
-                            div.id=fields[i].id+'-error';
-                            div.classList.add('text-red-500');
-                            div.innerHTML='No Image';
-                            fields[i].parentElement.parentElement.parentElement.append(div);
-                        }
-                        e.preventDefault();
-                        continue;
-                    }
-                    else{
-                        alert(fields[i].dataset.image);
-                        if(fields[i].dataset.image!='unedited'){
-                            const div=document.createElement('div');
-                            div.id=fields[i].id+'-error';
-                            div.classList.add('text-red-500');
-                            div.innerHTML='No Image';
-                            fields[i].parentElement.parentElement.parentElement.append(div);
-                        }                   
-                        else if(fields[i].dataset.image=='unedited'){
-                            content.value=content.value+`<img id="${fields[i].id}" />`;
-                            continue;
-                        } 
-                        e.preventDefault();
-                        continue;
-                    }
-                }
-            }
-            if(fields[i].classList.contains('image')){
-                if(!fields[i].files[0].name.match(/.(jpg|jpeg|png|gif)$/i)){
-                    let error=document.getElementById(fields[i].id+'-error');
-                    if(error==null){
-                        const div=document.createElement('div');
-                        div.id=fields[i].id+'-error';
-                        div.classList.add('text-red-500');
-                        div.innerHTML='Not Valid Image Type';
-                        fields[i].parentElement.parentElement.parentElement.append(div);
-                    }
-                    e.preventDefault();
-                }
-                else if((fields[i].files[0].size/1024/1024) > 2 ){
-                    let error=document.getElementById(fields[i].id+'-error');
-                    if(error==null){
-                        const div=document.createElement('div');
-                        div.id=fields[i].id+'-error';
-                        div.classList.add('text-red-500');
-                        div.innerHTML='Not Valid Image File Size Must Be Less Than 2GB';
-                        fields[i].parentElement.parentElement.parentElement.append(div);
-                    }
-                    e.preventDefault();
-                }
-                else if(fields[i].files && fields[i].files[0]){
-                    content.value=content.value+`<img id="${fields[i].id}" />`;
-                }
-            }
+        else if(id=="image3"){
+            return image3;
+        }
+        else if(id=="image4"){
+            return image4;
+        }
+        else if(id=="image5"){
+            return image5;
+        }
+        else{
+            return null;
         }
     }
-    //////////////////////////////////////////////////////////////////////////
+    
 </script>

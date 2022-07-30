@@ -32,7 +32,6 @@ function previewPost(){
         if(fields[i].classList.contains('title')){
             if(fields[i].value){
                 const heading = document.createElement("h1");
-                // heading.classList.add('font-medium');
                 heading.classList.add('underline');
                 heading.classList.add('text-xl');
                 heading.classList.add('mt-2');

@@ -46,8 +46,8 @@ Route::get('/posts/search',[PostsController::class,'search']);
 
 // Post Templates
 Route::get('/dashboard',[PostsController::class,'index'])->middleware('auth');
-Route::get('/post/{id}',[PostsController::class,'show']);
 Route::get('/post/create',[PostsController::class,'create'])->middleware('auth');
+Route::get('/post/{id}',[PostsController::class,'show']);
 Route::get('/post/{post}/edit',[PostsController::class,'edit'])->middleware('auth');
 
 // Post Actions

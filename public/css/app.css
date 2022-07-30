@@ -796,6 +796,9 @@ video {
 .min-h-\[500px\] {
   min-height: 500px;
 }
+.min-h-\[600px\] {
+  min-height: 600px;
+}
 .w-24 {
   width: 6rem;
 }
@@ -1146,6 +1149,9 @@ video {
 .pb-12 {
   padding-bottom: 3rem;
 }
+.pt-48 {
+  padding-top: 12rem;
+}
 .text-center {
   text-align: center;
 }
@@ -1434,12 +1440,21 @@ html,body{
     padding-right: 7rem;
   }
 
+  .sm\:py-36 {
+    padding-top: 9rem;
+    padding-bottom: 9rem;
+  }
+
   .sm\:pt-0 {
     padding-top: 0px;
   }
 
   .sm\:pb-0 {
     padding-bottom: 0px;
+  }
+
+  .sm\:pt-48 {
+    padding-top: 12rem;
   }
 
   .sm\:text-5xl {

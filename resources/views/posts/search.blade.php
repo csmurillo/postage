@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class=" px-4 sm:px-4 md:px-28 lg:px-48">
     <div class="w-full flex xl:flex-row flex-col">

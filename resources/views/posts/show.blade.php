@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="px-4 sm:px-28 md:px-32 lg:px-72 xl:px-96 pt-2 h-full">
     <div class="flex flex-col h-full justify-between">

@@ -1,17 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="h-full px-4 sm:px-4 md:px-20 lg:px-20 flex flex-col pb-20 sm:pb-0">
+<div class="h-full px-4 sm:px-4 md:px-20 lg:px-20 flex flex-col pb-20 sm:pb-0 min-h-[500px]">
     <h1 class="text-4xl mb-4">Dashboard</h1>
-    {{-- <div class="w-full flex-1 flex justify-center items-center">
-        <p class="text-3xl">No Posts</p>
-    </div> --}}
-    <div class="sm:grid md:grid-cols-3 sm:grid-cols-2 gap-4 flex-col space-y-6 sm:space-y-0">
-        @foreach($posts as $post)
-            {{-- card --}}
-            <x-card :post="$post"></x-card>
-        @endforeach
-    </div>
+    @if (count($posts)>0)
+        <div class="sm:grid md:grid-cols-3 sm:grid-cols-2 gap-4 flex-col space-y-6 sm:space-y-0">
+            @foreach($posts as $post)
+                {{-- card --}}
+                <x-card :post="$post"></x-card>
+            @endforeach
+        </div>
+    @else
+        <p class="w-full text-center text-xl pt-48">No Posts</p>
+    @endif
 </div>
 
 {{-- tablet/desktop --}}
@@ -25,7 +26,6 @@
 </div>
 
 @endsection
-
 
 
 
