@@ -66,15 +66,17 @@
     </form>
 </div>
 
+
 <script src="{{ asset('js/posts/edit/index.js') }}"></script>
 <script src="{{ asset('js/posts/inputManager.js') }}"></script>
 <script src="{{ asset('js/posts/setImageSection.js') }}"></script>
 <script src="{{ asset('js/posts/setInputSection.js') }}"></script>
-<script src="{{ asset('js/posts/editImageSection.js') }}"></script>
-<script src="{{ asset('js/posts/editInputSection.js') }}"></script>
+<script src="{{ asset('js/posts/setEditImageSection.js') }}"></script>
+<script src="{{ asset('js/posts/setEditInputSection.js') }}"></script>
 <script src="{{ asset('js/posts/previewPost.js') }}"></script>
 
 @endsection
+
 <script>
     window.onload=()=>{
         setupEditForm();

@@ -35,8 +35,6 @@
                         Update Password
                     </button>
                 </div>
-
-            {{--  --}}
         </form>
     </div>
 </div>
