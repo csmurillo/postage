@@ -24,7 +24,7 @@ Postage is an Social Publishing Platform where people all over the world can wri
 
 ## Built With
 
-Laravel
+- Laravel
 
 ## Author
 
