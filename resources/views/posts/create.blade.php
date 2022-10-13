@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<x-demo-modal></x-demo-modal>
 <div class="relative flex flex-col px-4 sm:px-10 md:px-20 lg:px-48 xl:px-72">
     <div id="preview-create" class="hidden">
         <div class="mb-5">

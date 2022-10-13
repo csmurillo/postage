@@ -2,7 +2,7 @@
 <div class="card relative flex flex-col z-[1] group hover:cursor-pointer" onclick="@if (str_contains(url()->current(), '/dashboard')) cardClick(event,'/post/{{$post->id}}');@else window.location.href = window.location.origin+'/post/{{$post->id}}'  @endif">
     <div class="absolute top-0 right-1 z-[10]">
         <div class="absolute top-0 right-0 border-2 border-gray-100 rounded mt-2 mr-2 cursor-pointer">
-            @if (url()->current() == 'http://localhost:8000/dashboard')
+            @if (url()->current() == 'http://postage-app.herokuapp.com/dashboard')
             <div id="three-dots-container" class="threedots disabled:group" onclick="editDropdown(this)" onmouseover="this.parentElement.parentElement.parentElement.classList.remove('group')" onmouseout="this.parentElement.parentElement.parentElement.classList.add('group')">
                 <x-bi-three-dots id="three-dots" class="text-white w-6 h-6" onclick="editDropdown(this)" />
             </div>
