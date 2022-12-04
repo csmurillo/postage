@@ -12,7 +12,7 @@
                 <x-feathericon-edit class="w-4 h-4 sm:w-6 sm:h-6" />
             </div>
             <p class="text-xl">About</p>
-            <p id="description-value" class="flex">{{Auth::user()->profile->description}}</p>
+            <p id="description-value" class="flex">{{Auth::user()->profile->description ?? ''}}</p>
             <form id="update-description" class="hidden flex-1 flex-col" action="/profile/{{ Auth::user()->id }}" enctype="multipart/form-data" method="post">
                 @csrf
                 @method('PATCH')
